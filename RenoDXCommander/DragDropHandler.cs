@@ -1,4 +1,4 @@
-// DragDropHandler.cs — Primary file: class declaration, constructor, extension validation, drag-over/drop routing, and URL/shortcut helpers.
+﻿// DragDropHandler.cs — Primary file: class declaration, constructor, extension validation, drag-over/drop routing, and URL/shortcut helpers.
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -78,14 +78,14 @@ public partial class DragDropHandler
         if (e.DataView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.StorageItems))
         {
             e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
-            e.DragUIOverride.Caption = "Drop to add game, install addon, install preset, or extract archive";
+            e.DragUIOverride.Caption = "拖放以添加游戏、安装插件、安装预设或解压压缩包";
             e.DragUIOverride.IsCaptionVisible = true;
             e.DragUIOverride.IsGlyphVisible = true;
         }
         else if (e.DataView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text))
         {
             e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
-            e.DragUIOverride.Caption = "Drop URL to download addon";
+            e.DragUIOverride.Caption = "拖放URL以下载插件";
             e.DragUIOverride.IsCaptionVisible = true;
             e.DragUIOverride.IsGlyphVisible = true;
         }

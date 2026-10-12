@@ -142,8 +142,8 @@ public sealed partial class MainWindow
                 case nameof(ViewModel.IsBackgroundScanning):
                     HdrModsListBtn.IsEnabled = !ViewModel.IsBackgroundScanning;
                     ToolTipService.SetToolTip(HdrModsListBtn, ViewModel.IsBackgroundScanning
-                        ? "Loading mod data, please wait..."
-                        : "Browse all games with available HDR mods");
+                        ? "正在加载模组数据，请稍候..."
+                        : "浏览所有有可用 HDR 模组的游戏");
                     break;
                 case nameof(ViewModel.CurrentPage):
                     UpdatePageVisibility();
@@ -257,7 +257,7 @@ public sealed partial class MainWindow
 
     internal void UpdateLumaToggleStyle(bool isLumaMode)
     {
-        DetailLumaToggleText.Text = isLumaMode ? "Luma ON" : "Luma OFF";
+        DetailLumaToggleText.Text = isLumaMode ? "Luma 开" : "Luma 关";
         if (isLumaMode)
         {
             DetailLumaToggle.Background = Brush(ResourceKeys.AccentGreenBgBrush);

@@ -25,7 +25,7 @@ public sealed class UpdateLogWindow : Window
     {
         _updateLogService = updateLogService;
 
-        Title = "Component Updates";
+        Title = "组件更新";
 
         // Size — 720 × 500 logical px, DPI-scaled
         var hwnd = WindowNative.GetWindowHandle(this);
@@ -116,7 +116,7 @@ public sealed class UpdateLogWindow : Window
 
         var clearBtn = new Button
         {
-            Content     = "Clear History",
+            Content     = "清除历史",
             FontSize    = 11,
             Padding     = new Thickness(10, 4, 10, 4),
             Margin      = new Thickness(0, 0, 8, 0),
@@ -131,7 +131,7 @@ public sealed class UpdateLogWindow : Window
             {
                 listPanel.Children.Clear();
                 BuildEntryList(listPanel);
-                countText.Text = "No updates recorded yet.";
+                countText.Text = "尚无更新记录。";
             });
         };
         Grid.SetColumn(clearBtn, 1);
@@ -139,7 +139,7 @@ public sealed class UpdateLogWindow : Window
 
         var closeBtn = new Button
         {
-            Content     = "Close",
+            Content     = "关闭",
             FontSize    = 11,
             Padding     = new Thickness(10, 4, 10, 4),
             Background  = UIFactory.Brush(ResourceKeys.AccentBlueBgBrush),
@@ -165,7 +165,7 @@ public sealed class UpdateLogWindow : Window
         {
             listPanel.Children.Add(new TextBlock
             {
-                Text       = "No component updates have been recorded yet.\n\nUpdates are captured whenever RHI downloads a new version of ReShade, RenoDX addons, shader packs, OptiScaler, Display Commander, or other components.",
+                Text       = "尚无组件更新记录。\n\n每当 RHI 下载新版本的 ReShade、RenoDX 附加组件、着色器包、OptiScaler、Display Commander 或其他组件时，都会捕获更新。",
                 FontSize   = 12,
                 Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush),
                 TextWrapping = TextWrapping.Wrap,

@@ -1,4 +1,4 @@
-// MainWindow.Events.Components.cs — Per-component cog button (⚙️) dialog handlers (RS, RDX, UL, DC, OS, DXVK).
+﻿// MainWindow.Events.Components.cs — Per-component cog button (⚙️) dialog handlers (RS, RDX, UL, DC, OS, DXVK).
 
 using System;
 using System.IO;
@@ -128,7 +128,7 @@ public sealed partial class MainWindow
         // Open ReShade.ini
         var openIniBtn = new Button
         {
-            Content = "Open ReShade.ini",
+            Content = "打开 ReShade.ini",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush),
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
@@ -148,7 +148,7 @@ public sealed partial class MainWindow
         // Open ReShade.log
         var openLogBtn = new Button
         {
-            Content = "Open ReShade.log",
+            Content = "打开 ReShade.log",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush),
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
@@ -168,7 +168,7 @@ public sealed partial class MainWindow
         // Copy ReShade.log to clipboard (as file, so Discord shows "ReShade.log")
         var copyLogBtn = new Button
         {
-            Content = "Copy ReShade.log to clipboard",
+            Content = "复制 ReShade.log 到剪贴板",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush),
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
@@ -214,12 +214,12 @@ public sealed partial class MainWindow
         {
             Text = HotkeyManager.FormatHotkeyDisplay(hotkeyString),
             IsReadOnly = true,
-            PlaceholderText = "Click then press a key...",
+            PlaceholderText = "点击后按下一个键...",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(hotkeyBox, "Click here then press your desired key. Written to all reshade*.ini files for this game.");
-        hotkeyBox.GotFocus  += (s, ev) => hotkeyBox.Text = "Press a key...";
+        hotkeyBox.GotFocus  += (s, ev) => hotkeyBox.Text = "按下一个键...";
         hotkeyBox.KeyDown   += (s, ev) =>
         {
             var vk = (int)ev.Key;
@@ -231,9 +231,9 @@ public sealed partial class MainWindow
             hotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(hotkeyString);
             ev.Handled = true;
         };
-        hotkeyBox.LostFocus += (s, ev) => { if (hotkeyBox.Text == "Press a key...") hotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(hotkeyString); };
+        hotkeyBox.LostFocus += (s, ev) => { if (hotkeyBox.Text == "按下一个键...") hotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(hotkeyString); };
 
-        var applyKeyBtn = new Button { Content = "Apply", FontSize = 12, Padding = new Thickness(16, 7, 16, 7), HorizontalAlignment = HorizontalAlignment.Right };
+        var applyKeyBtn = new Button { Content = "应用", FontSize = 12, Padding = new Thickness(16, 7, 16, 7), HorizontalAlignment = HorizontalAlignment.Right };
         applyKeyBtn.Click += async (s, ev) =>
         {
             if (string.IsNullOrEmpty(card.InstallPath)) return;
@@ -256,7 +256,7 @@ public sealed partial class MainWindow
                     catch (Exception ex) { return (0, ex.Message); }
                 });
                 if (error != null) { card.RsActionMessage = $"❌ {error}"; return; }
-                applyKeyBtn.Content = "Applied!";
+                applyKeyBtn.Content = "已应用！";
                 _crashReporter.Log($"[RsCogButton_Click] Applied overlay key '{hotkeyString}' to {count} ini file(s) for '{card.GameName}'");
             }
             catch (Exception ex) { card.RsActionMessage = $"❌ {ex.Message}"; }
@@ -266,12 +266,12 @@ public sealed partial class MainWindow
         {
             Text = HotkeyManager.FormatHotkeyDisplay(screenshotHotkeyString),
             IsReadOnly = true,
-            PlaceholderText = "Click then press a key...",
+            PlaceholderText = "点击后按下一个键...",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(screenshotHotkeyBox, "Press a key to assign it, or Backspace to clear it. Written to all reshade*.ini files for this game.");
-        screenshotHotkeyBox.GotFocus  += (s, ev) => screenshotHotkeyBox.Text = "Press a key...";
+        screenshotHotkeyBox.GotFocus  += (s, ev) => screenshotHotkeyBox.Text = "按下一个键...";
         screenshotHotkeyBox.KeyDown   += (s, ev) =>
         {
             var vk2 = (int)ev.Key;
@@ -283,9 +283,9 @@ public sealed partial class MainWindow
             screenshotHotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(screenshotHotkeyString);
             ev.Handled = true;
         };
-        screenshotHotkeyBox.LostFocus += (s, ev) => { if (screenshotHotkeyBox.Text == "Press a key...") screenshotHotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(screenshotHotkeyString); };
+        screenshotHotkeyBox.LostFocus += (s, ev) => { if (screenshotHotkeyBox.Text == "按下一个键...") screenshotHotkeyBox.Text = HotkeyManager.FormatHotkeyDisplay(screenshotHotkeyString); };
 
-        var applyScreenshotKeyBtn = new Button { Content = "Apply", FontSize = 12, Padding = new Thickness(16, 7, 16, 7), HorizontalAlignment = HorizontalAlignment.Right };
+        var applyScreenshotKeyBtn = new Button { Content = "应用", FontSize = 12, Padding = new Thickness(16, 7, 16, 7), HorizontalAlignment = HorizontalAlignment.Right };
         applyScreenshotKeyBtn.Click += async (s, ev) =>
         {
             if (string.IsNullOrEmpty(card.InstallPath)) return;
@@ -308,7 +308,7 @@ public sealed partial class MainWindow
                     catch (Exception ex) { return (0, ex.Message); }
                 });
                 if (error != null) { card.RsActionMessage = $"❌ {error}"; return; }
-                applyScreenshotKeyBtn.Content = "Applied!";
+                applyScreenshotKeyBtn.Content = "已应用！";
                 _crashReporter.Log($"[RsCogButton_Click] Applied screenshot key '{screenshotHotkeyString}' to {count} ini file(s) for '{card.GameName}'");
             }
             catch (Exception ex) { card.RsActionMessage = $"❌ {ex.Message}"; }
@@ -320,7 +320,7 @@ public sealed partial class MainWindow
         hotkeysGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
         var overlayCol = new StackPanel { Spacing = 4 };
-        overlayCol.Children.Add(new TextBlock { Text = "Overlay Key", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) });
+        overlayCol.Children.Add(new TextBlock { Text = "覆盖层按键", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) });
         var overlayRow = new Grid { ColumnSpacing = 8 };
         overlayRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         overlayRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -329,7 +329,7 @@ public sealed partial class MainWindow
         overlayCol.Children.Add(overlayRow);
 
         var screenshotCol = new StackPanel { Spacing = 4 };
-        screenshotCol.Children.Add(new TextBlock { Text = "Screenshot Key", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) });
+        screenshotCol.Children.Add(new TextBlock { Text = "截图键", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) });
         var screenshotRow = new Grid { ColumnSpacing = 8 };
         screenshotRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         screenshotRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -350,7 +350,7 @@ public sealed partial class MainWindow
 
         var keepUpdatedLabel = new TextBlock
         {
-            Text = "Keep ReShade.ini Updated",
+            Text = "保持 ReShade.ini 更新",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             VerticalAlignment = VerticalAlignment.Center,
@@ -381,9 +381,9 @@ public sealed partial class MainWindow
 
         var dialog = new ContentDialog
         {
-            Title = "ReShade Settings",
+            Title = "ReShade 设置",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -485,7 +485,7 @@ public sealed partial class MainWindow
             // Label in column 0
             var nitsLabel = new TextBlock
             {
-                Text = "Set Maximum Nits",
+                Text = "设置最大尼特",
                 FontSize = 11,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 VerticalAlignment = VerticalAlignment.Center,
@@ -558,7 +558,7 @@ public sealed partial class MainWindow
                 BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(8), Padding = new Thickness(10, 5, 10, 5), FontSize = 11,
             };
-            ToolTipService.SetToolTip(autoBtn, "Reads your monitor's peak brightness automatically.");
+            ToolTipService.SetToolTip(autoBtn, "自动读取显示器的峰值亮度。");
             autoBtn.Click += async (s, ev) =>
             {
                 try
@@ -627,7 +627,7 @@ public sealed partial class MainWindow
 
             var upLabel = new TextBlock
             {
-                Text = "Upgrade Path",
+                Text = "升级路径",
                 FontSize = 11,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 VerticalAlignment = VerticalAlignment.Center,
@@ -815,7 +815,7 @@ public sealed partial class MainWindow
                 content.Children.Add(new Border { Height = 1, Background = UIFactory.Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 2) });
                 content.Children.Add(new TextBlock
                 {
-                    Text = "Compatibility Settings",
+                    Text = "兼容性设置",
                     FontSize = 13,
                     Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
                     Margin = new Thickness(0, 4, 0, 0),
@@ -991,7 +991,7 @@ public sealed partial class MainWindow
         {
             content.Children.Add(new TextBlock
             {
-                Text = "Run the game once with RenoDX installed to generate settings.",
+                Text = "安装 RenoDX 后运行一次游戏以生成设置。",
                 FontSize = 11,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 FontStyle = Windows.UI.Text.FontStyle.Italic,
@@ -1002,7 +1002,7 @@ public sealed partial class MainWindow
         {
             content.Children.Add(new TextBlock
             {
-                Text = "No reshade.ini found in game folder.",
+                Text = "游戏文件夹中未找到 reshade.ini。",
                 FontSize = 11,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 FontStyle = Windows.UI.Text.FontStyle.Italic,
@@ -1024,7 +1024,7 @@ public sealed partial class MainWindow
 
         var exportBtn = new Button
         {
-            Content = "Export Presets",
+            Content = "导出预设",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.AccentBlueBgBrush),
             Foreground = UIFactory.Brush(ResourceKeys.AccentBlueBrush),
@@ -1091,7 +1091,7 @@ public sealed partial class MainWindow
 
         var importBtn = new Button
         {
-            Content = "Import Presets",
+            Content = "导入预设",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.AccentBlueBgBrush),
             Foreground = UIFactory.Brush(ResourceKeys.AccentBlueBrush),
@@ -1166,7 +1166,7 @@ public sealed partial class MainWindow
         });
         content.Children.Add(new TextBlock
         {
-            Text = "Requires NVIDIA App with Overlay and Game Filters enabled.",
+            Text = "需要 NVIDIA App 并启用覆盖层和游戏滤镜。",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.InlineDescriptionBrush),
             TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
@@ -1313,7 +1313,7 @@ public sealed partial class MainWindow
         });
         content.Children.Add(new TextBlock
         {
-            Text = "Windows 11 Auto HDR forced via registry. Works without the global Auto HDR setting enabled.",
+            Text = "通过注册表强制启用 Windows 11 Auto HDR。无需启用全局 Auto HDR 设置即可工作。",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.InlineDescriptionBrush),
             TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
@@ -1418,7 +1418,7 @@ public sealed partial class MainWindow
         {
             Title = "RenoDX Settings",
             Content = new ScrollViewer { Content = content, MaxHeight = 620, Padding = new Thickness(0, 0, 16, 0) },
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1662,13 +1662,13 @@ public sealed partial class MainWindow
             if (currentDebanding == (int)debandingOptions[i].value) selectedDbIndex = i;
         }
         debandingCombo.SelectedIndex = selectedDbIndex;
-        var dbLabel = new TextBlock { Text = "Debanding", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush) };
+        var dbLabel = new TextBlock { Text = "去色带", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush) };
         content.Children.Add(dbLabel);
         content.Children.Add(debandingCombo);
         if (!isAdmin)
             content.Children.Add(new TextBlock
             {
-                Text = "Requires admin mode to change",
+                Text = "需要管理员模式才能更改",
                 FontSize = 10,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 Margin = new Thickness(0, -4, 0, 0),
@@ -1685,7 +1685,7 @@ public sealed partial class MainWindow
         var defaultsPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, Margin = new Thickness(0, 4, 0, 0) };
         var saveDefaultBtn = new Button
         {
-            Content = "Save as Default",
+            Content = "另存为默认",
             FontSize = 11,
             Padding = new Thickness(12, 6, 12, 6),
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -1693,7 +1693,7 @@ public sealed partial class MainWindow
         ToolTipService.SetToolTip(saveDefaultBtn, "Save current slider values as your default RTX HDR preset");
         var setDefaultBtn = new Button
         {
-            Content = "Set Default",
+            Content = "设为默认",
             FontSize = 11,
             Padding = new Thickness(12, 6, 12, 6),
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -1718,7 +1718,7 @@ public sealed partial class MainWindow
                     new JsonSerializerOptions { WriteIndented = true }));
                 setDefaultBtn.IsEnabled = true;
                 ToolTipService.SetToolTip(setDefaultBtn, "Apply your saved default preset to the sliders");
-                saveDefaultBtn.Content = "Saved!";
+                saveDefaultBtn.Content = "已保存！";
             }
             catch (Exception ex) { CrashReporter.Log($"[RtxHdrConfigButton_Click] Failed to save defaults — {ex.Message}"); }
         };
@@ -1760,7 +1760,7 @@ public sealed partial class MainWindow
         {
             Title = "RTX HDR Settings",
             Content = new ScrollViewer { Content = content, MaxHeight = 600, Padding = new Thickness(0, 0, 16, 0) },
-            PrimaryButtonText = "Apply",
+            PrimaryButtonText = "应用",
             CloseButtonText = "Cancel",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -1921,7 +1921,7 @@ public sealed partial class MainWindow
         {
             Title = "Auto HDR Settings",
             Content = new ScrollViewer { Content = content, MaxHeight = 600, Padding = new Thickness(0, 0, 16, 0) },
-            PrimaryButtonText = "Apply",
+            PrimaryButtonText = "应用",
             CloseButtonText   = "Cancel",
             XamlRoot          = Content.XamlRoot,
             RequestedTheme    = ElementTheme.Dark,
@@ -1990,7 +1990,7 @@ public sealed partial class MainWindow
         // Open relimiter log
         var openLogBtn = new Button
         {
-            Content = "Open ReLimiter log",
+            Content = "打开 ReLimiter 日志",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush),
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
@@ -2049,7 +2049,7 @@ public sealed partial class MainWindow
         content.Children.Add(new Border { Height = 1, Background = UIFactory.Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 2) });
         content.Children.Add(new TextBlock
         {
-            Text = "Frame Limiter",
+            Text = "帧限制器",
             FontSize = 13,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             Margin = new Thickness(0, 4, 0, 0),
@@ -2061,7 +2061,7 @@ public sealed partial class MainWindow
         targetFpsPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         var targetFpsLabel = new TextBlock
         {
-            Text = "Target FPS",
+            Text = "目标 FPS",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             VerticalAlignment = VerticalAlignment.Center,
@@ -2117,7 +2117,7 @@ public sealed partial class MainWindow
         // Inline custom FPS input (shown when "Custom..." is selected)
         var customFpsPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, Visibility = Visibility.Collapsed };
         var customFpsBox = new TextBox { PlaceholderText = "20-1000", FontSize = 12, MinWidth = 100 };
-        var customFpsBtn = new Button { Content = "Set", FontSize = 12 };
+        var customFpsBtn = new Button { Content = "设置", FontSize = 12 };
         customFpsPanel.Children.Add(customFpsBox);
         customFpsPanel.Children.Add(customFpsBtn);
 
@@ -2284,7 +2284,7 @@ public sealed partial class MainWindow
         content.Children.Add(new Border { Height = 1, Background = UIFactory.Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 2) });
         content.Children.Add(new TextBlock
         {
-            Text = "Compatibility Settings",
+            Text = "兼容性设置",
             FontSize = 13,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             Margin = new Thickness(0, 4, 0, 0),
@@ -2356,9 +2356,9 @@ public sealed partial class MainWindow
 
         var dialog = new ContentDialog
         {
-            Title = "ReLimiter Settings",
+            Title = "ReLimiter 设置",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2396,7 +2396,7 @@ public sealed partial class MainWindow
         {
             Title = "Display Commander Settings",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2417,7 +2417,7 @@ public sealed partial class MainWindow
 
         var deleteStorageBtn = new Button
         {
-            Content = "Delete _storage_ folder",
+            Content = "删除 _storage_ 文件夹",
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = UIFactory.Brush(ResourceKeys.AccentRedBgBrush),
             Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush),
@@ -2440,7 +2440,7 @@ public sealed partial class MainWindow
         deleteStorageBtn.Click += async (s, ev) =>
         {
             deleteStorageBtn.IsEnabled = false;
-            deleteStorageBtn.Content = "Deleting...";
+            deleteStorageBtn.Content = "删除中...";
             try
             {
                 await Task.Run(() => System.IO.Directory.Delete(storageDir, recursive: true));
@@ -2453,7 +2453,7 @@ public sealed partial class MainWindow
                 statusText.Text = $"❌ {ex.Message}";
                 statusText.Foreground = UIFactory.GetBrush("#E85050");
                 deleteStorageBtn.IsEnabled = true;
-                deleteStorageBtn.Content = "Delete _storage_ folder";
+                deleteStorageBtn.Content = "删除 _storage_ 文件夹";
                 CrashReporter.Log($"[RefCogButton_Click] Failed to delete _storage_ folder: {ex.Message}");
             }
         };
@@ -2465,7 +2465,7 @@ public sealed partial class MainWindow
         {
             Title = "RE Framework Settings",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2789,7 +2789,7 @@ public sealed partial class MainWindow
 
             // Section heading: Frame Generation Settings
             unifiedGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            var fgHeading = new TextBlock { Text = "Frame Generation Settings", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) };
+            var fgHeading = new TextBlock { Text = "帧生成设置", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) };
             Grid.SetRow(fgHeading, 4); Grid.SetColumn(fgHeading, 0); Grid.SetColumnSpan(fgHeading, 4);
             unifiedGrid.Children.Add(fgHeading);
 
@@ -3009,7 +3009,7 @@ public sealed partial class MainWindow
 
             // ── Additional Settings ────────────────────────────────────────
             content.Children.Add(MakeSeparator());
-            content.Children.Add(new TextBlock { Text = "Additional Settings", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
+            content.Children.Add(new TextBlock { Text = "附加设置", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
 
             var addGrid = MakeSettingsGrid();
 
@@ -3126,7 +3126,7 @@ public sealed partial class MainWindow
             if (isUnreal)
             {
                 content.Children.Add(MakeSeparator());
-                content.Children.Add(new TextBlock { Text = "Engine.ini Settings", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
+                content.Children.Add(new TextBlock { Text = "Engine.ini 设置", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
 
                 var ueGrid = MakeSettingsGrid();
 
@@ -3171,7 +3171,7 @@ public sealed partial class MainWindow
             if (isDlssNr)
             {
                 content.Children.Add(MakeSeparator());
-                content.Children.Add(new TextBlock { Text = "Neural Rendering Settings", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
+                content.Children.Add(new TextBlock { Text = "神经渲染设置", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 2, 0, 0) });
                 var nrGrid = MakeSettingsGrid();
 
                 // Helper: read a key from the [DlssNr] section of OptiScaler.ini
@@ -3352,7 +3352,7 @@ public sealed partial class MainWindow
 
                 var saveBtn = new Button
                 {
-                    Content = "Save",
+                    Content = "保存",
                     FontSize = 11,
                     Width = 42,
                     Padding = new Thickness(4),
@@ -3645,7 +3645,7 @@ public sealed partial class MainWindow
 
         bottomBorder.Children.Add(new TextBlock
         {
-            Text = "If the game crashes with both ReShade and OptiScaler installed, try renaming ReShade to d3d12.dll (or another DLL name) using DLL Naming Overrides in the Overrides panel.",
+            Text = "如果同时安装 ReShade 和 OptiScaler 后游戏崩溃，请尝试在覆盖面板的 DLL 命名覆盖中将 ReShade 重命名为 d3d12.dll（或其他 DLL 名称）。",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             TextWrapping = TextWrapping.Wrap,
@@ -3701,7 +3701,7 @@ public sealed partial class MainWindow
         {
             Title = "OptiScaler Settings",
             Content = rootGrid,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -3754,7 +3754,7 @@ public sealed partial class MainWindow
 
         var variantLabel = new TextBlock
         {
-            Text = "Variant",
+            Text = "变体",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             VerticalAlignment = VerticalAlignment.Center,
@@ -3783,7 +3783,7 @@ public sealed partial class MainWindow
 
         var liliumPresetLabel = new TextBlock
         {
-            Text = "Lilium Preset",
+            Text = "Lilium 预设",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             VerticalAlignment = VerticalAlignment.Center,
@@ -3898,7 +3898,7 @@ public sealed partial class MainWindow
         // Row 0: Prefer DXGI Swapchain
         var presentLabel = new TextBlock
         {
-            Text = "Prefer DXGI Swapchain",
+            Text = "首选 DXGI 交换链",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             VerticalAlignment = VerticalAlignment.Center,
@@ -3993,7 +3993,7 @@ public sealed partial class MainWindow
         {
             Title = "DXVK Settings",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

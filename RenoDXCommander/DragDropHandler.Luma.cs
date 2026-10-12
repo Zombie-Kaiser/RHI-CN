@@ -155,7 +155,7 @@ public partial class DragDropHandler
                         };
                         dialog = new Microsoft.UI.Xaml.Controls.ContentDialog
                         {
-                            Title = "Select Folder",
+                            Title = "选择文件夹",
                             Content = new Microsoft.UI.Xaml.Controls.StackPanel
                             {
                                 Spacing = 8,
@@ -163,15 +163,15 @@ public partial class DragDropHandler
                                 {
                                     new Microsoft.UI.Xaml.Controls.TextBlock
                                     {
-                                        Text = "This archive contains multiple game folders.\nSelect the folder to install:",
+                                        Text = "此压缩包包含多个游戏文件夹。\n请选择要安装的文件夹：",
                                         TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                                         FontSize = 12,
                                     },
                                     combo,
                                 }
                             },
-                            PrimaryButtonText = "Install",
-                            CloseButtonText = "Cancel",
+                            PrimaryButtonText = "安装",
+                            CloseButtonText = "取消",
                             XamlRoot = _window.Content.XamlRoot,
                             RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                         };

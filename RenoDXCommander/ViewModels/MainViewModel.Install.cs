@@ -1,4 +1,4 @@
-// MainViewModel.Install.cs -- Install/uninstall commands for RenoDX, ReShade, ReLimiter, RE Framework, and Luma.
+﻿// MainViewModel.Install.cs -- Install/uninstall commands for RenoDX, ReShade, ReLimiter, RE Framework, and Luma.
 
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -120,7 +120,7 @@ public partial class MainViewModel
             card.IsExternalOnly = effectiveMod?.SnapshotUrl == null &&
                                   (effectiveMod?.NexusUrl != null || effectiveMod?.DiscordUrl != null);
             card.ExternalUrl    = effectiveMod?.NexusUrl ?? effectiveMod?.DiscordUrl ?? "";
-            card.ExternalLabel  = effectiveMod?.NexusUrl != null ? "Download from Nexus Mods" : "Download from Discord";
+            card.ExternalLabel  = effectiveMod?.NexusUrl != null ? "从 Nexus Mods 下载" : "从 Discord 下载";
             card.NexusUrl       = effectiveMod?.NexusUrl;
             card.DiscordUrl     = effectiveMod?.DiscordUrl;
             card.WikiStatus     = (mod == null && fallback != null && !card.UseUeExtended && !card.IsNativeHdrGame)
@@ -570,7 +570,7 @@ public partial class MainViewModel
                                  && addonOnDisk != UeExtendedFile
                                  && addonOnDisk != GenericUnrealFile;
         // When a named addon is on disk but no wiki mod exists, replace the generic
-        // engine fallback with a Discord link so the button shows "Download from Discord"
+        // engine fallback with a Discord link so the button shows "从 Discord 下载"
         // instead of "Reinstall RenoDX/UE-Extended".
         if (hasNamedAddonOnDiskM && effectiveMod?.IsGenericUnreal == true)
         {
@@ -680,7 +680,7 @@ public partial class MainViewModel
                               : effectiveMod?.NexusUrl ?? effectiveMod?.DiscordUrl ?? "",
             ExternalLabel   = _wikiExclusions.Contains(game.Name)
                               ? ""
-                              : effectiveMod?.NexusUrl != null ? "Download from Nexus Mods" : "Download from Discord",
+                              : effectiveMod?.NexusUrl != null ? "从 Nexus Mods 下载" : "从 Discord 下载",
             NexusUrl        = effectiveMod?.NexusUrl,
             DiscordUrl      = _wikiExclusions.Contains(game.Name)
                               ? null

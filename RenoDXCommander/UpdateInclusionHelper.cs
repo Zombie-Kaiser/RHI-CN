@@ -87,7 +87,7 @@ public static class UpdateInclusionHelper
 
         var button = new Button
         {
-            Content = "Update Inclusion",
+            Content = "更新包含",
             Background = UIFactory.Brush(ResourceKeys.AccentBlueBgBrush),
             Foreground = UIFactory.Brush(ResourceKeys.AccentBlueBrush),
             BorderBrush = UIFactory.Brush(ResourceKeys.AccentBlueBorderBrush),
@@ -121,7 +121,7 @@ public static class UpdateInclusionHelper
                 : null;
 
             var checkPanel = new StackPanel { Spacing = 0 };
-            checkPanel.Children.Add(new TextBlock { Text = "Include this game in Update All for:", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
+            checkPanel.Children.Add(new TextBlock { Text = "将此游戏包含在更新全部中：", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
             checkPanel.Children.Add(rsCheck);
             checkPanel.Children.Add(rdxCheck);
             checkPanel.Children.Add(ulCheck);
@@ -134,7 +134,7 @@ public static class UpdateInclusionHelper
             {
                 Title = "Global Update Inclusion",
                 Content = checkPanel,
-                PrimaryButtonText = "Save",
+                PrimaryButtonText = "保存",
                 CloseButtonText = "Cancel",
                 XamlRoot = effectiveRoot,
                 RequestedTheme = ElementTheme.Dark,

@@ -68,7 +68,7 @@ public partial class DetailPanelBuilder
         };
         var ovTitle = new TextBlock
         {
-            Text       = "Game Overrides",
+            Text       = "游戏覆盖",
             FontSize   = 13,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
@@ -140,7 +140,7 @@ public partial class DetailPanelBuilder
         // ── Game name + Wiki name ────────────────────────────────────────────────
         var detectedBox = new TextBox
         {
-            Header = "Game name (editable)",
+            Header = "游戏名称（可编辑）",
             Text = gameName,
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -149,8 +149,8 @@ public partial class DetailPanelBuilder
             "The display name for this game. Edit and press Enter to rename. Reset reverts to the auto-detected store name.");
         var wikiBox = new TextBox
         {
-            Header = "Wiki mod name",
-            PlaceholderText = "Exact wiki name",
+            Header = "Wiki 模组名称",
+            PlaceholderText = "精确 Wiki 名称",
             Text = _window.ViewModel.GetUserNameMapping(gameName) ?? "",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -164,7 +164,7 @@ public partial class DetailPanelBuilder
 
         var resetBtn = new Button
         {
-            Content = "Reset",
+            Content = "重置",
             FontSize = 12,
             VerticalAlignment = VerticalAlignment.Bottom,
             Padding = new Thickness(10, 6, 10, 6),
@@ -267,7 +267,7 @@ public partial class DetailPanelBuilder
 
         var osNameBox = new ComboBox
         {
-            PlaceholderText = "Select OptiScaler DLL name",
+            PlaceholderText = "选择 OptiScaler DLL 名称",
             FontSize = 12,
             IsEnabled = true,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -553,7 +553,7 @@ public partial class DetailPanelBuilder
         resetWikiRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
         // Restyle reset button to blue accent
-        resetBtn.Content = "Reset";
+        resetBtn.Content = "重置";
         resetBtn.FontSize = 12;
         resetBtn.Height = 32;
         resetBtn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -568,20 +568,20 @@ public partial class DetailPanelBuilder
         resetWikiRow.Children.Add(resetBtn);
 
         // Wiki lookup ComboBox (replaces ToggleSwitch)
-        var wikiExcludeItems = new[] { "Included", "Excluded" };
+        var wikiExcludeItems = new[] { "已包含", "已排除" };
         var wikiExcludeCombo = new ComboBox
         {
             ItemsSource = wikiExcludeItems,
-            SelectedItem = _window.ViewModel.IsWikiExcluded(gameName) ? "Excluded" : "Included",
+            SelectedItem = _window.ViewModel.IsWikiExcluded(gameName) ? "已排除" : "已包含",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(wikiExcludeCombo,
-            "Included = this game is looked up on the RenoDX and Luma wikis. Excluded = skip wiki lookups for this game.");
+            "已包含 = 在 RenoDX 和 Luma Wiki 上查找此游戏。已排除 = 跳过此游戏的 Wiki 查找。");
         wikiExcludeCombo.SelectionChanged += (s, ev) =>
         {
             var selected = wikiExcludeCombo.SelectedItem as string;
-            bool shouldExclude = selected == "Excluded";
+            bool shouldExclude = selected == "已排除";
             if (shouldExclude != _window.ViewModel.IsWikiExcluded(capturedName))
                 _window.ViewModel.ToggleWikiExclusion(capturedName);
         };
@@ -613,7 +613,7 @@ public partial class DetailPanelBuilder
 
         var dllOverrideLabel = new TextBlock
         {
-            Text = "DLL naming overrides",
+            Text = "DLL 命名覆盖",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
         };
@@ -649,7 +649,7 @@ public partial class DetailPanelBuilder
         // Reset DLL Names button — reverts all three DLLs to defaults and clears the config
         resetDllBtn = new Button
         {
-            Content = "Reset DLL Names",
+            Content = "重置 DLL 名称",
             FontSize = 12,
             Height = 28,
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -957,19 +957,19 @@ public partial class DetailPanelBuilder
         // ── Bitness Override ComboBox (left column of Bitness & API Row) ─────────
         var bitnessLabel = new TextBlock
         {
-            Text = "Bitness",
+            Text = "位数",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             Margin = new Thickness(0, 0, 0, 8),
         };
 
-        var bitnessItems = new[] { "Auto", "32-bit", "64-bit" };
+        var bitnessItems = new[] { "自动", "32位", "64位" };
         var currentBitnessOverride = _window.ViewModel.GetBitnessOverride(gameName, card.Source);
         var defaultBitnessSelection = currentBitnessOverride switch
         {
-            "32" => "32-bit",
-            "64" => "64-bit",
-            _ => "Auto",
+            "32" => "32位",
+            "64" => "64位",
+            _ => "自动",
         };
 
         var bitnessCombo = new ComboBox
@@ -980,15 +980,15 @@ public partial class DetailPanelBuilder
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(bitnessCombo,
-            "Override the auto-detected bitness for this game. Auto uses PE header detection. 32-bit or 64-bit forces the value.");
+            "覆盖此游戏的自动检测位数。自动使用 PE 头检测。32位或64位强制指定值。");
 
         bitnessCombo.SelectionChanged += (s, e) =>
         {
             var selected = bitnessCombo.SelectedItem as string;
             string? overrideValue = selected switch
             {
-                "32-bit" => "32",
-                "64-bit" => "64",
+                "32位" => "32",
+                "64位" => "64",
                 _ => null,
             };
 
@@ -1063,7 +1063,7 @@ public partial class DetailPanelBuilder
         // ── API Override ComboBox (single selection, placed in left panel below bitness) ──────
         var apiLabel = new TextBlock
         {
-            Text = "Graphics API",
+            Text = "图形 API",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
         };
@@ -1073,11 +1073,11 @@ public partial class DetailPanelBuilder
             "User overrides set here take precedence over manifest and auto-detected values.\n" +
             "Reset Overrides reverts to auto-detection.");
 
-        var apiDropdownItems = new[] { "Auto", "DirectX8", "DirectX9", "DirectX10", "DirectX11", "DirectX12", "Vulkan", "OpenGL" };
+        var apiDropdownItems = new[] { "自动", "DirectX8", "DirectX9", "DirectX10", "DirectX11", "DirectX12", "Vulkan", "OpenGL" };
         var existingApiOverride = _window.ViewModel.GetApiOverride(gameName, card.Source);
 
         // Determine current selection
-        string defaultApiSelection = "Auto";
+        string defaultApiSelection = "自动";
         if (existingApiOverride != null && existingApiOverride.Count > 0)
         {
             // Map stored override back to dropdown label

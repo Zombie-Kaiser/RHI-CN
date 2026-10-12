@@ -1,4 +1,4 @@
-// MainViewModel.BackgroundScan.cs -- Background scanning, card merging, and staging migrations.
+﻿// MainViewModel.BackgroundScan.cs -- Background scanning, card merging, and staging migrations.
 
 using System.Collections.Concurrent;
 using System.Globalization;
@@ -22,7 +22,7 @@ public partial class MainViewModel
     private async Task RunBackgroundScanAndMergeAsync(SavedGameLibrary savedLib, bool isStartup = false)
     {
         IsBackgroundScanning = true;
-        BackgroundScanStatusText = "Scanning for changes...";
+        BackgroundScanStatusText = "正在扫描更改...";
         _crashReporter.Log("[MainViewModel.RunBackgroundScanAndMergeAsync] Starting background scan...");
 
         try

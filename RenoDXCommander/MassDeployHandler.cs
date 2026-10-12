@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RenoDXCommander.Models;
@@ -184,7 +184,7 @@ public class MassDeployHandler
             : $"No games found with the corresponding component installed.";
         var dialog = new ContentDialog
         {
-            Title = "Mass INI Deployment",
+            Title = "批量 INI 部署",
             Content = message,
             CloseButtonText = "OK",
             XamlRoot = _window.Content.XamlRoot,
@@ -209,8 +209,8 @@ public class MassDeployHandler
         {
             var noGamesDialog = new ContentDialog
             {
-                Title = "No Games Available",
-                Content = "No games with ReShade installed were found. Install ReShade on at least one game first.",
+                Title = "无可用游戏",
+                Content = "未找到已安装 ReShade 的游戏。请先至少在一个游戏上安装 ReShade。",
                 CloseButtonText = "OK",
                 XamlRoot = xamlRoot,
                 RequestedTheme = ElementTheme.Dark,
@@ -232,7 +232,7 @@ public class MassDeployHandler
         };
         var deselectAllBtn = new Button
         {
-            Content = "Deselect All",
+            Content = "全部取消选择",
             FontSize = 11,
             Padding = new Thickness(8, 4, 8, 4),
             Margin = new Thickness(0, 0, 0, 8),
@@ -319,8 +319,8 @@ public class MassDeployHandler
         {
             Title = "🔧 Install Shaders?",
             Content = $"Presets deployed to {selectedGames.Count} game(s).\n\nAlso install the required shader packs for these games?",
-            PrimaryButtonText = "Yes",
-            CloseButtonText = "No",
+            PrimaryButtonText = "是",
+            CloseButtonText = "否",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

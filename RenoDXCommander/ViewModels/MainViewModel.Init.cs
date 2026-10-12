@@ -318,13 +318,13 @@ public partial class MainViewModel
             if (hasCachedLibrary)
             {
                 StatusText    = $"Library loaded ({savedLib!.Games.Count} games, scanned {FormatAge(savedLib.LastScanned)})";
-                SubStatusText = "Checking for new games and fetching latest mod info...";
+                SubStatusText = "正在检查新游戏并获取最新模组信息...";
                 addonCache    = savedLib.AddonScanCache;
             }
             else
             {
-                StatusText    = "Scanning game library...";
-                SubStatusText = "Running store scans + wiki fetch simultaneously...";
+                StatusText    = "正在扫描游戏库...";
+                SubStatusText = "正在同时运行商店扫描和 Wiki 获取...";
                 addonCache    = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
             }
 
@@ -699,7 +699,7 @@ public partial class MainViewModel
             // a visual gap where the update badge disappears until the network check completes.
             // (prevUpdateStatus was captured at the top of InitializeAsync before _allCards.Clear())
 
-            SubStatusText = "Matching mods and checking install status...";
+            SubStatusText = "正在匹配模组并检查安装状态...";
 
             // Ensure Nexus Mods dictionary and PCGW AppID cache are ready before building cards
             await nexusInitTask;
@@ -923,7 +923,7 @@ public partial class MainViewModel
         }
         catch (Exception ex)
         {
-            StatusText = "Error loading";
+            StatusText = "加载出错";
             SubStatusText = ex.Message;
             _crashReporter.WriteCrashReport("InitializeAsync", ex);
         }

@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using RenoDXCommander.Models;
 using RenoDXCommander.Services;
 using RenoDXCommander.ViewModels;
@@ -30,7 +30,7 @@ public partial class MainViewModel
         {
             var dontShowAgain = new CheckBox
             {
-                Content = "Don't show this warning again",
+                Content = "不再显示此警告",
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 Margin = new Microsoft.UI.Xaml.Thickness(0, 8, 0, 0),
             };
@@ -38,20 +38,20 @@ public partial class MainViewModel
             var contentPanel = new StackPanel();
             contentPanel.Children.Add(new TextBlock
             {
-                Text = "⚠ ADVANCED FEATURE — USE AT YOUR OWN RISK\n\n"
-                    + "DXVK is an unofficial DirectX-to-Vulkan translation layer.\n"
-                    + "No support will be provided if a game is not compatible.\n\n"
-                    + "WHO SHOULD USE THIS:\n"
-                    + "• Primarily benefits older DX8/DX9 games (e.g. FFXIV, Morrowind)\n"
-                    + "• Enables ReShade compute shaders on games that don't support them natively\n"
-                    + "• Can reduce CPU-bound stuttering in older titles\n\n"
-                    + "IMPORTANT WARNINGS:\n"
-                    + "• Anti-cheat games may ban players using DXVK\n"
-                    + "• Game overlays (Steam, NVIDIA, RTSS) may conflict or stop working\n"
-                    + "• Exclusive fullscreen is blocked — use borderless windowed\n"
-                    + "• First launch will be slow due to shader compilation (improves on subsequent runs)\n"
-                    + "• Some games may crash or have graphical glitches with DXVK\n\n"
-                    + "Do you want to continue?",
+                Text = "⚠ 高级功能 — 风险自负\n\n"
+                    + "DXVK 是非官方的 DirectX 到 Vulkan 转换层。\n"
+                    + "如果游戏不兼容，将不提供任何支持。\n\n"
+                    + "适用人群：\n"
+                    + "• 主要使旧版 DX8/DX9 游戏受益（如 FFXIV、Morrowind）\n"
+                    + "• 在原生不支持的游戏上启用 ReShade 计算着色器\n"
+                    + "• 可减少旧游戏的 CPU 瓶颈卡顿\n\n"
+                    + "重要警告：\n"
+                    + "• 反作弊游戏可能会封禁使用 DXVK 的玩家\n"
+                    + "• 游戏覆盖层（Steam、NVIDIA、RTSS）可能冲突或停止工作\n"
+                    + "• 独占全屏被阻止 — 请使用无边框窗口模式\n"
+                    + "• 首次启动会因着色器编译而变慢（后续运行会改善）\n"
+                    + "• 某些游戏可能崩溃或出现图形故障\n\n"
+                    + "是否继续？",
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                 Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
                 FontSize = 13,
@@ -60,10 +60,10 @@ public partial class MainViewModel
 
             var warningDialog = new ContentDialog
             {
-                Title = "⚠ DXVK Warning",
+                Title = "⚠ DXVK 警告",
                 Content = contentPanel,
-                PrimaryButtonText = "Continue",
-                CloseButtonText = "Cancel",
+                PrimaryButtonText = "继续",
+                CloseButtonText = "取消",
                 XamlRoot = xamlRoot,
                 RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
             };
@@ -86,7 +86,7 @@ public partial class MainViewModel
         _dxvkService.LiliumPresetIndex = GetLiliumPreset(card.GameName, card.Source ?? "");
 
         card.DxvkIsInstalling = true;
-        card.DxvkActionMessage = "Installing DXVK...";
+        card.DxvkActionMessage = "正在安装 DXVK...";
         card.DxvkProgress = 0;
         try
         {
@@ -154,7 +154,7 @@ public partial class MainViewModel
         if (string.IsNullOrEmpty(card.InstallPath)) return;
 
         card.DxvkIsInstalling = true;
-        card.DxvkActionMessage = "Removing DXVK...";
+        card.DxvkActionMessage = "正在移除 DXVK...";
         try
         {
             await _dxvkService.UninstallAsync(card);
@@ -215,7 +215,7 @@ public partial class MainViewModel
         if (string.IsNullOrEmpty(card.InstallPath)) return;
 
         card.DxvkIsInstalling = true;
-        card.DxvkActionMessage = "Updating DXVK...";
+        card.DxvkActionMessage = "正在更新 DXVK...";
         card.DxvkProgress = 0;
         try
         {

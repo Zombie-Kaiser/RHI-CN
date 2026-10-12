@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using RenoDXCommander.Services;
@@ -78,7 +78,7 @@ public partial class DialogService
     {
         var dlg = new ContentDialog
         {
-            Title   = "🔄 Update Available",
+            Title   = "🔄 有可用更新",
             Content = new StackPanel
             {
                 Spacing = 8,
@@ -89,15 +89,15 @@ public partial class DialogService
                         TextWrapping = TextWrapping.Wrap,
                         Foreground   = Brush(ResourceKeys.TextSecondaryBrush),
                         FontSize     = 14,
-                        Text         = $"A new version of RHI is available!\n\n" +
-                                       $"Installed:  v{updateInfo.CurrentVersion}\n" +
-                                       $"Available:  v{updateInfo.DisplayVersion ?? updateInfo.RemoteVersion.ToString()}\n\n" +
-                                       "Would you like to update now?",
+                        Text         = $"RHI 有新版本可用！\n\n" +
+                                       $"当前版本：v{updateInfo.CurrentVersion}\n" +
+                                       $"最新版本：v{updateInfo.DisplayVersion ?? updateInfo.RemoteVersion.ToString()}\n\n" +
+                                       "是否立即更新？",
                     },
                 },
             },
-            PrimaryButtonText   = "Update Now",
-            CloseButtonText     = "Later",
+            PrimaryButtonText   = "立即更新",
+            CloseButtonText     = "稍后",
             XamlRoot            = _window.Content.XamlRoot,
             Background          = Brush(ResourceKeys.SurfaceRaisedBrush),
             RequestedTheme      = ElementTheme.Dark,
@@ -115,7 +115,7 @@ public partial class DialogService
         // Create a non-dismissable progress dialog
         var progressText = new TextBlock
         {
-            Text         = "Starting download...",
+            Text         = "开始下载...",
             TextWrapping = TextWrapping.Wrap,
             Foreground   = Brush(ResourceKeys.TextSecondaryBrush),
             FontSize     = 13,
@@ -130,7 +130,7 @@ public partial class DialogService
         };
         var downloadDlg = new ContentDialog
         {
-            Title   = "⬇ Downloading Update",
+            Title   = "⬇ 正在下载更新",
             Content = new StackPanel
             {
                 Spacing = 12,
@@ -162,9 +162,9 @@ public partial class DialogService
         if (string.IsNullOrEmpty(installerPath))
         {
             // Download failed — update dialog to show error with a Close button
-            progressText.Text = "❌ Download failed. Please try again later or download manually from GitHub.";
+            progressText.Text = "❌ 下载失败。请稍后重试，或从GitHub手动下载。";
             progressBar.Value = 0;
-            downloadDlg.CloseButtonText = "Close";
+            downloadDlg.CloseButtonText = "关闭";
             await progressSession.Completion;
             return;
         }
@@ -262,9 +262,9 @@ public partial class DialogService
 
         var dlg = new ContentDialog
         {
-            Title              = "📋 Patch Notes — What's New",
+            Title              = "📋 更新日志 — 最新内容",
             Content            = scrollViewer,
-            CloseButtonText    = "Close",
+            CloseButtonText    = "关闭",
             XamlRoot           = _window.Content.XamlRoot,
             Background         = Brush(ResourceKeys.SurfaceToolbarBrush),
             RequestedTheme     = ElementTheme.Dark,
@@ -314,7 +314,7 @@ public partial class DialogService
     {
         var dlg = new ContentDialog
         {
-            Title = "📢 Message from RHI",
+            Title = "📢 来自 RHI 的消息",
             Content = new ScrollViewer
             {
                 Content = new TextBlock
@@ -325,7 +325,7 @@ public partial class DialogService
                 },
                 MaxHeight = 400,
             },
-            CloseButtonText = "OK",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

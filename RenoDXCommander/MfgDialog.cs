@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RenoDXCommander.Services;
 using RenoDXCommander.ViewModels;
@@ -38,11 +38,11 @@ public static class MfgDialog
             var warningPanel = new StackPanel { Spacing = 12 };
             warningPanel.Children.Add(new TextBlock
             {
-                Text = "Multi Frame Generation (MFG) and Dynamic MFG are only supported on NVIDIA 50 Series GPUs (Blackwell architecture).\n\n" +
-                       "Minimum driver requirements:\n" +
-                       "• MFG (Fixed): Driver 572.16+\n" +
-                       "• DMFG (Dynamic): Driver 595.97+\n\n" +
-                       "These settings will have no effect on 40 Series or older hardware.",
+                Text = "多帧生成 (MFG) 和动态 MFG 仅支持 NVIDIA 50 系列 GPU（Blackwell 架构）。\n\n" +
+                       "最低驱动要求：\n" +
+                       "• MFG（固定）：驱动 572.16+\n" +
+                       "• DMFG（动态）：驱动 595.97+\n\n" +
+                       "这些设置对 40 系列或更早的硬件无效。",
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = 13,
                 Foreground = UIFactory.Brush(ResourceKeys.AccentAmberBrush),
@@ -50,7 +50,7 @@ public static class MfgDialog
 
             var dontShowCheck = new CheckBox
             {
-                Content = "Don't show this warning again",
+                Content = "不再显示此警告",
                 FontSize = 12,
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             };
@@ -130,7 +130,7 @@ public static class MfgDialog
         // ── Frame Count ──
         panel.Children.Add(new TextBlock
         {
-            Text = "Frame Count",
+            Text = "帧数",
             FontSize = 11,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
@@ -150,7 +150,7 @@ public static class MfgDialog
         // ── Target Frame Rate ──
         panel.Children.Add(new TextBlock
         {
-            Text = "Target Frame Rate",
+            Text = "目标帧率",
             FontSize = 11,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
@@ -170,7 +170,7 @@ public static class MfgDialog
         // Inline custom FPS input (shown when "Custom..." is selected)
         var customFpsPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, Visibility = Visibility.Collapsed };
         var customFpsBox = new TextBox { PlaceholderText = "20-1000", FontSize = 13, MinWidth = 100 };
-        var customFpsBtn = new Button { Content = "Set", FontSize = 12 };
+        var customFpsBtn = new Button { Content = "设置", FontSize = 12 };
         customFpsPanel.Children.Add(customFpsBox);
         customFpsPanel.Children.Add(customFpsBtn);
         panel.Children.Add(customFpsPanel);
@@ -482,9 +482,9 @@ public static class MfgDialog
         // ── Show dialog ──
         var dialog = new ContentDialog
         {
-            Title = "Multi Frame Generation",
+            Title = "多帧生成",
             Content = panel,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

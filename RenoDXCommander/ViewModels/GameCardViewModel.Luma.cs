@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using RenoDXCommander.Models;
 
@@ -44,7 +44,7 @@ public partial class GameCardViewModel
         : (!IsRsInstalled && !ExcludeFromUpdateAllReShade && LumaStatus == GameStatus.NotInstalled) ? "⚠  ReShade required"
         : LumaStatus == GameStatus.UpdateAvailable ? "⬆  Update Luma"
         : LumaStatus == GameStatus.Installed ? "↺  Reinstall Luma"
-        : LumaIsExternalOnly ? "Get on Nexus Mods"
+        : LumaIsExternalOnly ? "在 Nexus Mods 获取"
         : "⬇  Install Luma";
 
     // Component table: Luma short status/action (consistent with RS/DC/RDX)

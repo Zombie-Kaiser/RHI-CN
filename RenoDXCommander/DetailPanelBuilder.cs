@@ -299,7 +299,7 @@ public partial class DetailPanelBuilder
 
         // Utility buttons — set Tag for event handlers
         _window.DetailFavBtn.Tag = card;
-        _window.DetailFavIcon.Text = "Favourite";
+        _window.DetailFavIcon.Text = "收藏";
         var favColor = card.IsFavourite
             ? ((SolidColorBrush)Application.Current.Resources[ResourceKeys.AccentAmberBrush]).Color
             : ((SolidColorBrush)Application.Current.Resources[ResourceKeys.ChipTextBrush]).Color;
@@ -353,7 +353,7 @@ public partial class DetailPanelBuilder
             bool resActive = resOverride != null
                 ? string.Equals(resOverride, "On", StringComparison.OrdinalIgnoreCase)
                 : _window.ViewModel.Settings.ResolutionAutoToggle;
-            _window.DetailResToggleText.Text = "RES";
+            _window.DetailResToggleText.Text = "分辨率";
             _window.DetailResToggleBtn.Background = resActive
                 ? UIFactory.Brush(ResourceKeys.AccentPurpleBgBrush)
                 : UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush);

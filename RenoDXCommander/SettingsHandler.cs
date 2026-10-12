@@ -266,14 +266,14 @@ public class SettingsHandler
             var inner = new Microsoft.UI.Xaml.Controls.StackPanel { Spacing = 12 };
             inner.Children.Add(new Microsoft.UI.Xaml.Controls.TextBlock
             {
-                Text       = "Freeze Diagnostics",
+                Text       = "冻结诊断",
                 FontSize   = 14,
                 FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
                 Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             });
             inner.Children.Add(new Microsoft.UI.Xaml.Controls.TextBlock
             {
-                Text         = "Test freeze detection. Each button blocks the UI thread differently. Check the session log - IDLE = waiting on lock/native call, PEGGED = layout or compute loop. Native Block tests the walk on a pure-native wait (no managed frames). Idle Baseline captures the stack while the UI is healthy.",
+                Text         = "测试冻结检测。每个按钮以不同方式阻塞 UI 线程。查看会话日志 - IDLE = 等待锁/原生调用，PEGGED = 布局或计算循环。Native Block 在纯原生等待上测试遍历（无托管帧）。Idle Baseline 在 UI 健康时捕获堆栈。",
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                 FontSize     = 11,
                 Foreground   = UIFactory.Brush(ResourceKeys.InlineDescriptionBrush),
@@ -287,15 +287,15 @@ public class SettingsHandler
             var btnRowBot = new Microsoft.UI.Xaml.Controls.StackPanel { Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal, Spacing = 8 };
             btnRow.Children.Add(btnRowTop);
             btnRow.Children.Add(btnRowBot);
-            var sleepBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Test IDLE (30s sleep)", FontSize = 11 };
+            var sleepBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "测试 IDLE（30秒睡眠）", FontSize = 11 };
             sleepBtn.Click += (s, e) => { _window.ViewModel.IsTestFreezeActive = true; System.Threading.Thread.Sleep(30000); _window.ViewModel.IsTestFreezeActive = false; };
-            var spinBtn  = new Microsoft.UI.Xaml.Controls.Button { Content = "Test PEGGED (10s spin)", FontSize = 11 };
+            var spinBtn  = new Microsoft.UI.Xaml.Controls.Button { Content = "测试 PEGGED（10秒旋转）", FontSize = 11 };
             spinBtn.Click  += (s, e) => { _window.ViewModel.IsTestFreezeActive = true; var end = DateTime.UtcNow.AddSeconds(10); while (DateTime.UtcNow < end) { } _window.ViewModel.IsTestFreezeActive = false; };
 
             // Native Block: WaitForSingleObject on an unsignaled event — pure native wait, WaitForSingleObject on an unsignaled event — pure native wait,
             // no managed frames above the wait. Expected top: ntdll!NtWaitForSingleObject,
             // then KERNELBASE!WaitForSingleObjectEx, then the managed-to-native boundary.
-            var nativeBlockBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Test Native Block (30s)", FontSize = 11 };
+            var nativeBlockBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "测试原生阻塞（30秒）", FontSize = 11 };
             nativeBlockBtn.Click += (s, e) =>
             {
                 var hEvent = NativeInterop.CreateEventW(IntPtr.Zero, true, false, null); // unsignaled manual-reset
@@ -310,7 +310,7 @@ public class SettingsHandler
             // Idle Baseline: triggers the native stack capture on a healthy UI thread.
             // Fires CaptureNativeUiThreadStack from a background task immediately.
             // Output shows what the idle message pump looks like — the reference for real freezes.
-            var idleBaselineBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Capture Idle Baseline", FontSize = 11 };
+            var idleBaselineBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "捕获空闲基线", FontSize = 11 };
             idleBaselineBtn.Click += (s, e) =>
             {
                 _ = System.Threading.Tasks.Task.Run(() =>
@@ -328,7 +328,7 @@ public class SettingsHandler
             // Dispatcher Exception: throws inside a TryEnqueue callback.
             // Checks whether app.UnhandledException fires, e.Handled = true takes effect,
             // and whether the dispatcher keeps running afterwards (timer + probes should continue).
-            var dispExBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Test Dispatcher Exception", FontSize = 11 };
+            var dispExBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "测试 Dispatcher 异常", FontSize = 11 };
             dispExBtn.Click += (s, e) =>
             {
                 CrashReporter.LogSync("[FreezeDiag] Test Dispatcher Exception: about to throw inside TryEnqueue(Normal)");
@@ -343,7 +343,7 @@ public class SettingsHandler
             // Reproduces rapid-navigation freeze patterns and shows which game/build triggers it.
             // Each selection is logged with a sequential counter and timestamp so the last logged
             // entry before [Heartbeat] *** UI FROZEN *** pinpoints exactly which game killed the dispatcher.
-            var stressBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Stress Loop (30 passes)", FontSize = 11 };
+            var stressBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "压力循环（30次）", FontSize = 11 };
             stressBtn.Click += (s, e) =>
             {
                 if (!stressBtn.IsEnabled) return;
@@ -382,7 +382,7 @@ public class SettingsHandler
             // Bypasses freeze detection entirely — just tests that restart, unclean marker,
             // and relaunch all work correctly.
             var btnRowBot2 = new Microsoft.UI.Xaml.Controls.StackPanel { Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal, Spacing = 8 };
-            var fastRestartBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Test Fast Restart (5s)", FontSize = 11 };
+            var fastRestartBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "测试快速重启（5秒）", FontSize = 11 };
             fastRestartBtn.Click += (s, e) =>
             {
                 if (!fastRestartBtn.IsEnabled) return;
@@ -414,7 +414,7 @@ public class SettingsHandler
             // Test Known Signature Freeze: blocks the dispatcher thread in a managed semaphore wait
             // while the Win32 pump stays alive. This matches the real freeze signature:
             // CPU=IDLE, pump responded, High probe times out → fast-path restart (~5s).
-            var knownSigBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "Test Known Sig Freeze (10s)", FontSize = 11 };
+            var knownSigBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "测试已知信号冻结（10秒）", FontSize = 11 };
             knownSigBtn.Click += (s, e) =>
             {
                 if (!knownSigBtn.IsEnabled) return;
@@ -443,7 +443,7 @@ public class SettingsHandler
             // EmptyWorkingSet stress: trims the process working set then immediately triggers
             // a card rebuild — reproduces the idle/trim/wake/rebuild pattern seen in freezes 4 and 5.
             var btnRowBot3 = new Microsoft.UI.Xaml.Controls.StackPanel { Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal, Spacing = 8, Margin = new Microsoft.UI.Xaml.Thickness(0, 4, 0, 0) };
-            var ewsBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "EmptyWS + Rebuild (visible)", FontSize = 11 };
+            var ewsBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "EmptyWS + 重建（可见）", FontSize = 11 };
             ewsBtn.Click += (s, e) =>
             {
                 CrashReporter.LogSync("[FreezeDiag] EmptyWorkingSet + Rebuild (visible): trimming then RequestCardRebuild");
@@ -453,7 +453,7 @@ public class SettingsHandler
                 if (card2 != null) _window.ViewModel.RequestCardRebuild?.Invoke(card2);
                 else CrashReporter.LogSync("[FreezeDiag] EmptyWorkingSet: no selected game");
             };
-            var ewsMinBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "EmptyWS + Rebuild (minimised)", FontSize = 11 };
+            var ewsMinBtn = new Microsoft.UI.Xaml.Controls.Button { Content = "EmptyWS + 重建（最小化）", FontSize = 11 };
             ewsMinBtn.Click += (s, e) =>
             {
                 CrashReporter.LogSync("[FreezeDiag] EmptyWorkingSet + Rebuild (minimised): hiding, trimming, rebuilding after 500ms");
@@ -666,11 +666,11 @@ public class SettingsHandler
                 // Check if it's due to admin rights
                 if (!VulkanLayerService.IsRunningAsAdmin())
                 {
-                    _window.DldsrCurrentStateText.Text = "Admin required to read DLDSR state";
+                    _window.DldsrCurrentStateText.Text = "需要管理员权限读取 DLDSR 状态";
                 }
                 else
                 {
-                    _window.DldsrCurrentStateText.Text = "No DLDSR-capable monitors detected";
+                    _window.DldsrCurrentStateText.Text = "未检测到支持 DLDSR 的显示器";
                 }
                 return;
             }
@@ -827,7 +827,7 @@ public class SettingsHandler
             : "Screenshot path, ReShade hotkeys, and effect list style";
         var dialog = new ContentDialog
         {
-            Title = "Screenshots & Hotkeys",
+            Title = "截图和热键",
             Content = $"{appliedSettings} applied to {updatedCount} game{(updatedCount == 1 ? "" : "s")}.",
             CloseButtonText = "OK",
             XamlRoot = _window.Content.XamlRoot,
@@ -879,8 +879,8 @@ public class SettingsHandler
         {
             var emptyDialog = new ContentDialog
             {
-                Title = "Peak Nits",
-                Content = "Peak nits is not configured or is disabled.",
+                Title = "峰值尼特",
+                Content = "峰值尼特未配置或已禁用。",
                 CloseButtonText = "OK",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
@@ -924,7 +924,7 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "Peak Nits",
+            Title = "峰值尼特",
             Content = $"Applied peak nits ({peakNits}) to {updatedCount} reshade.ini file{(updatedCount == 1 ? "" : "s")}.",
             CloseButtonText = "OK",
             XamlRoot = _window.Content.XamlRoot,
@@ -977,7 +977,7 @@ public class SettingsHandler
         {
             await DialogService.ShowSafeAsync(new ContentDialog
             {
-                Title = "Admin Mode",
+                Title = "管理员模式",
                 Content = "UAC is disabled on this system — RHI always runs as administrator.",
                 CloseButtonText = "OK",
                 XamlRoot = _window.Content.XamlRoot,
@@ -1000,7 +1000,7 @@ public class SettingsHandler
             // Show restart notice
             await DialogService.ShowSafeAsync(new ContentDialog
             {
-                Title = "Admin Mode",
+                Title = "管理员模式",
                 Content = enable
                     ? "Admin Mode enabled. Restart RHI for it to take effect."
                     : "Admin Mode disabled. RHI will launch normally on next start.",
@@ -1174,7 +1174,7 @@ public class SettingsHandler
             {
                 await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "Game Data Copied",
+                    Title = "游戏数据已复制",
                     Content = $"Data for {ViewModel.AllCards.Count} games has been gathered and copied to your clipboard. Paste directly into Discord to share.",
                     CloseButtonText = "OK",
                     XamlRoot = fe.XamlRoot,
@@ -1339,8 +1339,8 @@ public class SettingsHandler
             {
                 await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "Logs Copied",
-                    Content = "All session logs have been archived and copied to your clipboard. Paste directly into Discord to share.",
+                    Title = "日志已复制",
+                    Content = "所有会话日志已归档并复制到剪贴板。直接粘贴到 Discord 分享。",
                     CloseButtonText = "OK",
                     XamlRoot = fe.XamlRoot,
                 });
@@ -1358,8 +1358,8 @@ public class SettingsHandler
         var warningDialog = new ContentDialog
         {
             Title = "⚠ Purge Staging Files",
-            Content = "This will delete cached DLSS, Streamline, and component staging files to free disk space.\n\nShaders, installed RenoDX addons, and version metadata are preserved.\n\nThese files will be re-downloaded automatically when needed.\n\nContinue?",
-            PrimaryButtonText = "Purge",
+            Content = "这将删除缓存的 DLSS、Streamline 和组件暂存文件以释放磁盘空间。\n\n着色器、已安装的 RenoDX 附加组件和版本元数据会保留。\n\n这些文件在需要时会自动重新下载。\n\n继续？",
+            PrimaryButtonText = "清理",
             CloseButtonText = "Cancel",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -1875,7 +1875,7 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "ReLimiter Settings",
+            Title = "ReLimiter 设置",
             Content = $"Updated {updatedCount} relimiter.ini file{(updatedCount == 1 ? "" : "s")}.",
             CloseButtonText = "OK",
             XamlRoot = _window.Content.XamlRoot,
@@ -1976,7 +1976,7 @@ public class SettingsHandler
             var panel = new StackPanel { Spacing = 8 };
             panel.Children.Add(new TextBlock
             {
-                Text = "Enter a custom FPS value (20-1000):",
+                Text = "输入自定义 FPS 值（20-1000）：",
                 FontSize = 12,
             });
             var inputBox = new TextBox
@@ -1990,7 +1990,7 @@ public class SettingsHandler
             {
                 Title = "Custom Target FPS",
                 Content = panel,
-                PrimaryButtonText = "Set",
+                PrimaryButtonText = "设置",
                 CloseButtonText = "Cancel",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
@@ -2064,7 +2064,7 @@ public class SettingsHandler
         var refCheck = new CheckBox { Content = "RE Framework", IsChecked = !settings.GlobalSkipRefUpdates, FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush), Margin = new Thickness(0, 4, 0, 4) };
 
         var checkPanel = new StackPanel { Spacing = 0 };
-        checkPanel.Children.Add(new TextBlock { Text = "Include components in Update All globally:", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
+        checkPanel.Children.Add(new TextBlock { Text = "全局更新全部中包含的组件：", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
         checkPanel.Children.Add(rsCheck);
         checkPanel.Children.Add(rdxCheck);
         checkPanel.Children.Add(ulCheck);
@@ -2076,7 +2076,7 @@ public class SettingsHandler
         {
             Title = "Global Update Inclusion",
             Content = checkPanel,
-            PrimaryButtonText = "Save",
+            PrimaryButtonText = "保存",
             CloseButtonText = "Cancel",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -2497,14 +2497,14 @@ public class SettingsHandler
             _window.NexusStatusText.Foreground = UIFactory.Brush(
                 isPremium ? ResourceKeys.AccentGreenBrush : ResourceKeys.TextSecondaryBrush);
             _window.NexusDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-            _window.NexusConnectBtn.Content = "Re-connect";
+                    _window.NexusConnectBtn.Content = "重新连接";
         }
         else
         {
-            _window.NexusStatusText.Text = "Not connected";
+                    _window.NexusStatusText.Text = "未连接";
             _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
             _window.NexusDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-            _window.NexusConnectBtn.Content = "Connect";
+                    _window.NexusConnectBtn.Content = "连接";
         }
 
         // NXM handler status
@@ -2521,7 +2521,7 @@ public class SettingsHandler
         var nexusSso = App.Services.GetRequiredService<NexusSsoService>();
 
         _window.NexusConnectBtn.IsEnabled = false;
-        _window.NexusStatusText.Text = "Opening browser for authorisation...";
+        _window.NexusStatusText.Text = "正在打开浏览器进行授权...";
         _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
 
         using var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(120));
@@ -2534,7 +2534,7 @@ public class SettingsHandler
             catch (Exception ex) { CrashReporter.Log($"[SettingsHandler.NexusConnectBtn_Click] Failed to open browser — {ex.Message}"); }
 
             _window.DispatcherQueue?.TryEnqueue(() =>
-                _window.NexusStatusText.Text = "Waiting for authorisation in browser...");
+                _window.NexusStatusText.Text = "正在浏览器中等待授权...");
         };
 
         try
@@ -2559,14 +2559,14 @@ public class SettingsHandler
 
                 if (string.IsNullOrEmpty(receivedKey))
                 {
-                    _window.NexusStatusText.Text = "Authorisation timed out or was cancelled.";
+                    _window.NexusStatusText.Text = "授权超时或已取消。";
                     _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                     return;
                 }
 
                 if (info == null)
                 {
-                    _window.NexusStatusText.Text = "Received key was invalid. Please try again.";
+                    _window.NexusStatusText.Text = "收到的密钥无效。请重试。";
                     _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                     return;
                 }
@@ -2609,8 +2609,8 @@ public class SettingsHandler
                 var result = await DialogService.ShowSafeAsync(new ContentDialog
                 {
                     Title = "NXM Protocol Handler",
-                    Content = "Another application (e.g. Vortex or MO2) is already registered as the nxm:// handler. Registering RHI will replace it. Continue?",
-                    PrimaryButtonText = "Register RHI",
+                    Content = "其他应用程序（如 Vortex 或 MO2）已注册为 nxm:// 处理程序。注册 RHI 将替换它。继续？",
+                    PrimaryButtonText = "注册 RHI",
                     CloseButtonText = "Cancel",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
@@ -2676,9 +2676,9 @@ public class SettingsHandler
 
         if (App._gitHubTokenExpiredOnStartup)
         {
-            _window.GitHubStatusText.Text       = "GitHub session expired — please re-connect to restore the 5,000 req/hr limit";
+            _window.GitHubStatusText.Text       = "GitHub 会话已过期 — 请重新连接以恢复 5,000 请求/小时限制";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentAmberDimBrush);
-            _window.GitHubConnectBtn.Content    = "Re-connect";
+            _window.GitHubConnectBtn.Content    = "重新连接";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         }
         else if (connected)
@@ -2686,14 +2686,14 @@ public class SettingsHandler
             var display = string.IsNullOrEmpty(username) ? "GitHub" : $"@{username}";
             _window.GitHubStatusText.Text       = $"Connected as {display} · 5,000 req/hr";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentGreenBrush);
-            _window.GitHubConnectBtn.Content    = "Re-connect";
+            _window.GitHubConnectBtn.Content    = "重新连接";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         }
         else
         {
             _window.GitHubStatusText.Text       = hasPat ? "Using PAT · 5,000 req/hr" : "Not connected · 60 req/hr";
             _window.GitHubStatusText.Foreground = hasPat ? UIFactory.Brush(ResourceKeys.AccentGreenBrush) : UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
-            _window.GitHubConnectBtn.Content    = "Connect GitHub";
+            _window.GitHubConnectBtn.Content    = "连接 GitHub";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         }
 
@@ -2707,8 +2707,8 @@ public class SettingsHandler
         var http    = App.Services.GetRequiredService<HttpClient>();
 
         _window.GitHubConnectBtn.IsEnabled = false;
-        _window.GitHubConnectBtn.Content   = "Connecting...";
-        _window.GitHubStatusText.Text      = "Requesting device code...";
+        _window.GitHubConnectBtn.Content   = "连接中...";
+        _window.GitHubStatusText.Text      = "正在请求设备代码...";
         _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
         _window.GitHubDeviceCodePanel.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
@@ -2721,10 +2721,10 @@ public class SettingsHandler
         {
             _window.DispatcherQueue?.TryEnqueue(() =>
             {
-                _window.GitHubStatusText.Text      = "Failed to start authorisation. Check your connection and try again.";
+                _window.GitHubStatusText.Text      = "授权启动失败。检查连接并重试。";
                 _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                 _window.GitHubConnectBtn.IsEnabled  = true;
-                _window.GitHubConnectBtn.Content    = "Connect GitHub";
+                _window.GitHubConnectBtn.Content    = "连接 GitHub";
             });
             return;
         }
@@ -2736,7 +2736,7 @@ public class SettingsHandler
             _window.GitHubVerificationLink.NavigateUri = new Uri(deviceCode.VerificationUri);
             _window.GitHubVerificationLink.Content     = deviceCode.VerificationUri;
             _window.GitHubDeviceCodePanel.Visibility   = Microsoft.UI.Xaml.Visibility.Visible;
-            _window.GitHubStatusText.Text       = "Enter the code above at the link — waiting for authorisation...";
+            _window.GitHubStatusText.Text       = "在链接处输入上面的代码 — 等待授权...";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
         });
 
@@ -2754,11 +2754,11 @@ public class SettingsHandler
         {
             _window.DispatcherQueue?.TryEnqueue(() =>
             {
-                _window.GitHubStatusText.Text       = "Authorisation timed out or was cancelled.";
+                _window.GitHubStatusText.Text       = "授权超时或已取消。";
                 _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                 _window.GitHubDeviceCodePanel.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                 _window.GitHubConnectBtn.IsEnabled  = true;
-                _window.GitHubConnectBtn.Content    = "Connect GitHub";
+                _window.GitHubConnectBtn.Content    = "连接 GitHub";
             });
             return;
         }
@@ -2804,7 +2804,7 @@ public class SettingsHandler
         var pat = _window.GitHubPatBox.Text?.Trim() ?? "";
         if (string.IsNullOrEmpty(pat))
         {
-            _window.GitHubPatStatusText.Text = "Please enter a token first.";
+            _window.GitHubPatStatusText.Text = "请先输入令牌。";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;
@@ -2814,13 +2814,13 @@ public class SettingsHandler
         if (!pat.StartsWith("ghp_", StringComparison.OrdinalIgnoreCase) &&
             !pat.StartsWith("github_pat_", StringComparison.OrdinalIgnoreCase))
         {
-            _window.GitHubPatStatusText.Text = "Token should start with ghp_ or github_pat_";
+            _window.GitHubPatStatusText.Text = "令牌应以 ghp_ 或 github_pat_ 开头";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentAmberDimBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         }
 
         _window.GitHubPatSaveBtn.IsEnabled = false;
-        _window.GitHubPatSaveBtn.Content = "Validating...";
+        _window.GitHubPatSaveBtn.Content = "验证中...";
 
         // Validate the token
         bool valid = false;
@@ -2845,11 +2845,11 @@ public class SettingsHandler
         catch { valid = false; }
 
         _window.GitHubPatSaveBtn.IsEnabled = true;
-        _window.GitHubPatSaveBtn.Content = "Save";
+        _window.GitHubPatSaveBtn.Content = "保存";
 
         if (!valid)
         {
-            _window.GitHubPatStatusText.Text = "Token validation failed — check the token and try again.";
+            _window.GitHubPatStatusText.Text = "令牌验证失败 — 检查令牌并重试。";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;

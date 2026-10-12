@@ -1,4 +1,4 @@
-// MassDlssDeployDialog.cs — Batch DLSS & Streamline deployment dialog
+﻿// MassDlssDeployDialog.cs — Batch DLSS & Streamline deployment dialog
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -43,8 +43,8 @@ public class MassDlssDeployDialog
         {
             var emptyDialog = new ContentDialog
             {
-                Title = "No DLSS/Streamline Games",
-                Content = "No games with DLSS or Streamline DLLs were detected.\nRun a Full Refresh to scan for them.",
+                Title = "无 DLSS/Streamline 游戏",
+                Content = "未检测到带 DLSS 或 Streamline DLL 的游戏。\n运行完整刷新以扫描它们。",
                 CloseButtonText = "OK",
                 XamlRoot = _xamlRoot,
                 RequestedTheme = ElementTheme.Dark,
@@ -86,7 +86,7 @@ public class MassDlssDeployDialog
 
         var deselectAllBtn = new Button
         {
-            Content = "Deselect All", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
+            Content = "全部取消选择", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
             Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 30, 40, 60)),
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 180, 190, 220)),
             CornerRadius = new CornerRadius(6),
@@ -196,7 +196,7 @@ public class MassDlssDeployDialog
         // ── Dialog ──
         var dialog = new ContentDialog
         {
-            Title = "Batch DLSS & Streamline Deploy",
+            Title = "批量 DLSS 和 Streamline 部署",
             Content = mainGrid,
             PrimaryButtonText = "Deploy",
             SecondaryButtonText = "Restore",
@@ -258,7 +258,7 @@ public class MassDlssDeployDialog
         // Show progress
         var progressText = new TextBlock
         {
-            Text = "Deploying to selected games...",
+            Text = "正在部署到所选游戏...",
             FontSize = 12,
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 200, 200, 200)),
             TextWrapping = TextWrapping.Wrap,
@@ -469,7 +469,7 @@ public class MassDlssDeployDialog
         if (dlssCount > 0) report.AppendLine($"DLSS SR deployed to {dlssCount} game(s)");
         if (dlssdCount > 0) report.AppendLine($"DLSS RR deployed to {dlssdCount} game(s)");
         if (dlssgCount > 0) report.AppendLine($"DLSS FG deployed to {dlssgCount} game(s)");
-        if (slCount > 0) report.AppendLine($"Streamline deployed to {slCount} game(s)");
+        if (slCount > 0) report.AppendLine($"Streamline 已部署到 {slCount} 个游戏");
         if (srPresetCount > 0) report.AppendLine($"SR Preset applied to {srPresetCount} game(s)");
         if (rrPresetCount > 0) report.AppendLine($"RR Preset applied to {rrPresetCount} game(s)");
         if (fgPresetCount > 0) report.AppendLine($"FG Preset applied to {fgPresetCount} game(s)");
@@ -480,13 +480,13 @@ public class MassDlssDeployDialog
             report.AppendLine($"NVIDIA profiles created: {presetService.ProfilesCreatedCount}");
         if (skippedAlreadyAtVersion > 0) report.AppendLine($"\nSkipped: {skippedAlreadyAtVersion} (already at selected version)");
         if (skippedNoComponent > 0) report.AppendLine($"Skipped: {skippedNoComponent} (component not present)");
-        if (presetMissedCount > 0) report.AppendLine($"Presets missed: {presetMissedCount} game(s) (no NVIDIA profile found)");
+        if (presetMissedCount > 0) report.AppendLine($"未匹配预设：{presetMissedCount} 个游戏（未找到NVIDIA配置）");
 
-        if (report.Length == 0) report.Append("No changes made.");
+        if (report.Length == 0) report.Append("未做任何更改。");
 
         var resultDialog = new ContentDialog
         {
-            Title = "Batch Deploy Complete",
+            Title = "批量部署完成",
             Content = new TextBlock { Text = report.ToString().TrimEnd(), TextWrapping = TextWrapping.Wrap, FontSize = 12 },
             CloseButtonText = "OK",
             XamlRoot = _xamlRoot,
@@ -505,7 +505,7 @@ public class MassDlssDeployDialog
         // Show progress
         var progressText = new TextBlock
         {
-            Text = "Restoring selected games...",
+            Text = "正在恢复所选游戏...",
             FontSize = 12,
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 200, 200, 200)),
             TextWrapping = TextWrapping.Wrap,
@@ -526,7 +526,7 @@ public class MassDlssDeployDialog
 
         var progressDialog = new ContentDialog
         {
-            Title = "Restoring...",
+            Title = "正在恢复...",
             Content = progressContainer,
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -570,8 +570,8 @@ public class MassDlssDeployDialog
 
         var reportText = new System.Text.StringBuilder();
         if (restoredCount > 0) reportText.AppendLine($"Restored {restoredCount} game(s) to default DLLs.");
-        if (presetsResetCount > 0) reportText.AppendLine($"Reset presets to Default on {presetsResetCount} game(s).");
-        if (restoredCount == 0 && presetsResetCount == 0) reportText.Append("No games had backups to restore or presets to reset.");
+        if (presetsResetCount > 0) reportText.AppendLine($"已将 {presetsResetCount} 个游戏的预设重置为默认。");
+        if (restoredCount == 0 && presetsResetCount == 0) reportText.Append("没有可恢复备份或可重置预设的游戏。");
 
         var resultDialog = new ContentDialog
         {

@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using RenoDXCommander.Models;
 using RenoDXCommander.ViewModels;
 
@@ -314,7 +314,7 @@ public class GameInitializationService : IGameInitializationService
                     card.Mod.SnapshotUrl = null;
                 card.IsExternalOnly = true;
                 card.ExternalUrl    = ext.Url ?? "https://discord.gg/gF4GRJWZ2A";
-                card.ExternalLabel  = ext.Label ?? "Download from Discord";
+                card.ExternalLabel  = ext.Label ?? "从 Discord 下载";
                 // Set WikiStatus based on the actual download source
                 bool isNexus = ext.Url != null && ext.Url.Contains("nexusmods", StringComparison.OrdinalIgnoreCase);
                 card.WikiStatus     = isNexus ? "🌐" : "💬";
@@ -393,7 +393,7 @@ public class GameInitializationService : IGameInitializationService
                     card.Mod.SnapshotUrl = null;
                 card.IsExternalOnly  = true;
                 card.ExternalUrl     = ov.DiscordUrl ?? "https://discord.gg/gF4GRJWZ2A";
-                card.ExternalLabel   = "Download from Discord";
+                card.ExternalLabel   = "从 Discord 下载";
                 card.DiscordUrl      = ov.DiscordUrl ?? "https://discord.gg/gF4GRJWZ2A";
                 card.WikiStatus      = "💬";
             }

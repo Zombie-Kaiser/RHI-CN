@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using RenoDXCommander.Models;
@@ -45,14 +45,14 @@ public static class AddonPopupHelper
         {
             var emptyDlg = new ContentDialog
             {
-                Title = "Select Addons",
+                Title = "选择插件",
                 Content = new TextBlock
                 {
-                    Text = "No addons available.",
+                    Text = "暂无插件。",
                     FontSize = 13,
                     Foreground = Brush(ResourceKeys.TextPrimaryBrush),
                 },
-                CloseButtonText = "Close",
+                CloseButtonText = "关闭",
                 XamlRoot = xamlRoot,
                 Background = Brush(ResourceKeys.SurfaceOverlayBrush),
                 MinWidth = 750,
@@ -73,7 +73,7 @@ public static class AddonPopupHelper
             "RHI", "Custom", "Addons");
         var folderLink = new HyperlinkButton
         {
-            Content = "Place custom .addon64/.addon32 files here",
+            Content = "将自定义 .addon64/.addon32 文件放在此处",
             FontSize = 11,
             Foreground = Brush(ResourceKeys.AccentBlueBrush),
             Padding = new Thickness(0),
@@ -154,7 +154,7 @@ public static class AddonPopupHelper
             {
                 textPanel.Children.Add(new HyperlinkButton
                 {
-                    Content = "How to use",
+                    Content = "使用方法",
                     NavigateUri = new Uri(entry.RepositoryUrl),
                     FontSize = 11,
                     Foreground = Brush(ResourceKeys.AccentBlueBrush),
@@ -196,7 +196,7 @@ public static class AddonPopupHelper
             var toggle = new ToggleSwitch
             {
                 IsOn = isSelected,
-                OnContent = "On",
+                OnContent = "开",
                 OffContent = "Off",
                 VerticalAlignment = VerticalAlignment.Center,
                 IsEnabled = !peerIsSelected,
@@ -307,7 +307,7 @@ public static class AddonPopupHelper
         {
             panel.Children.Add(new TextBlock
             {
-                Text = "Custom Addons",
+                Text = "自定义插件",
                 FontSize = 12,
                 FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
                 Foreground = Brush(ResourceKeys.TextPrimaryBrush),
@@ -356,7 +356,7 @@ public static class AddonPopupHelper
                 var toggle = new ToggleSwitch
                 {
                     IsOn = isSelected,
-                    OnContent = "On",
+                    OnContent = "开",
                     OffContent = "Off",
                     VerticalAlignment = VerticalAlignment.Center,
                 };
@@ -392,7 +392,7 @@ public static class AddonPopupHelper
 
         var dlg = new ContentDialog
         {
-            Title = "Select Addons",
+            Title = "选择插件",
             Content = scrollViewer,
             PrimaryButtonText = "Deploy",
             CloseButtonText = "Cancel",

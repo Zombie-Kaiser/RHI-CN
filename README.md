@@ -1,167 +1,167 @@
-# RHI — ReShade HDR Installer
+# RHI — ReShade HDR 安装器（中文版）
 
-**One tool. Every game. Full HDR, DLSS, and NVIDIA driver management from a single window.**
+**一个工具。所有游戏。从一个窗口管理全部 HDR、DLSS 和 NVIDIA 驱动设置。**
 
-RHI detects your entire game library across every major store and handles ReShade, HDR mods, frame limiters, DLSS management, OptiScaler, shader packs, and NVIDIA driver profiles — all in one click.
-
----
-
-## Download
-
-**[Latest release](https://github.com/RankFTW/RenoDXChecker/releases/latest)** · **[Discord](https://discord.gg/ultraplace)**
+RHI 自动检测所有主流平台上的整个游戏库，一键处理 ReShade、HDR 模组、帧率限制器、DLSS 管理、OptiScaler、着色器包和 NVIDIA 驱动配置。
 
 ---
 
-## What It Does
+## 下载
 
-### One-Click HDR for Every Game
+**[最新版本](https://github.com/RankFTW/RenoDXChecker/releases/latest)** · **[Discord](https://discord.gg/ultraplace)**
 
-- **[RenoDX](https://github.com/clshortfuse/renodx)** — auto-detects and installs the right HDR mod for each game. Hundreds of bespoke game-specific mods, plus generic HDR support for every Unreal Engine and Unity game without one.
-- **UE-Extended** — the default for all Unreal Engine games without a named mod. Automatically configures `reshade.ini` and `Engine.ini` with the correct HDR settings. No manual ini editing.
-- **[Luma Framework](https://github.com/Filoppi/Luma-Framework)** — every DX11 Unreal Engine game in your library gets a Luma row automatically. Named mods for supported titles, generic support for everything else. Engine.ini keys, launch args, and TAA settings applied from the wiki automatically on install.
-- **[DXVK + Lilium HDR](https://github.com/EndlesslyFlowering/dxvk)** — brings scRGB HDR output to older DX9 games that normally have no HDR path at all.
-- **[RenoFX HDR Toolkit](https://github.com/clshortfuse/renofx)** — SDR-to-HDR conversion for any game that doesn't have a dedicated RenoDX mod yet.
+---
 
-### ReShade — Fully Managed
+## 功能介绍
 
-RHI replaces the ReShade installer entirely.
+### 为每个游戏提供一键 HDR
 
-- Detects each game's graphics API via PE binary scanning and names the DLL correctly — `dxgi.dll`, `d3d9.dll`, `opengl32.dll` — automatically.
-- Latest stable and nightly builds staged on every launch.
-- Per-game channels: Stable, Nightly, Custom, Legacy, or No Addons. Mix freely across your library.
-- Vulkan games use the global implicit layer — one-click install, no manual steps.
-- Foreign DLL detection: if another tool (DXVK, Special K, ENB) is already in the game folder, you're warned before anything is overwritten.
-- `reshade.ini` seeded and merged automatically — hotkeys, screenshot path, peak brightness, and DLSS paths all set without any manual configuration.
+- **[RenoDX](https://github.com/clshortfuse/renodx)** — 自动检测并为每个游戏安装正确的 HDR 模组。数百个游戏专属定制模组，并为没有专属模组的所有虚幻引擎和 Unity 游戏提供通用 HDR 支持。
+- **UE-Extended** — 所有没有专属模组的虚幻引擎游戏的默认选项。自动使用正确的 HDR 设置配置 `reshade.ini` 和 `Engine.ini`。无需手动编辑 ini。
+- **[Luma 框架](https://github.com/Filoppi/Luma-Framework)** — 游戏库中的每个 DX11 虚幻引擎游戏都会自动获得 Luma 行。受支持的游戏有专属模组，其他游戏提供通用支持。安装时自动应用 wiki 上的 Engine.ini 键值、启动参数和 TAA 设置。
+- **[DXVK + Lilium HDR](https://github.com/EndlesslyFlowering/dxvk)** — 为通常没有 HDR 输出路径的老旧 DX9 游戏带来 scRGB HDR 输出。
+- **[RenoFX HDR 工具包](https://github.com/clshortfuse/renofx)** — 为还没有专属 RenoDX 模组的任何游戏提供 SDR 转 HDR。
 
-### DLSS 5 and Neural Rendering
+### ReShade — 全托管
 
-- **DLSS5 Feeder** — full pipeline install in one click: deploys feeder addon, DLSS5 consumer, `nvngx_dlss.dll`, `nvngx_dlssnr.dll`, pre-configured `ReShadePreset.ini`, and required shader packs. Auto-selects the right method for your game (32-bit, DX11, DX12).
-- **ShortFuse DLSS Tool** — alternative neural rendering implementation for DX12 games.
-- **DX11 Bridge variant** — DLSS5 Tool + bridge for games that need DX11 compatibility.
-- **NR Cost Scaler** — wraps `nvngx_dlssnr.dll` to run neural rendering at reduced cost (default 75%). Toggle before installing a method to deploy it automatically.
+RHI 完全取代 ReShade 安装器。
 
-### DLSS and Streamline Version Manager
+- 通过 PE 二进制扫描检测每个游戏的图形 API 并自动正确命名 DLL — `dxgi.dll`、`d3d9.dll`、`opengl32.dll`。
+- 每次启动时暂存最新的稳定版和夜间版。
+- 每游戏通道：稳定版、夜间版、自定义、旧版或无插件。可在游戏库中自由混合。
+- Vulkan 游戏使用全局隐式层 — 一键安装，无需手动步骤。
+- 外来 DLL 检测：如果游戏文件夹中已有其他工具（DXVK、Special K、ENB），覆盖前会发出警告。
+- `reshade.ini` 自动初始化和合并 — 快捷键、截图路径、峰值亮度和 DLSS 路径全部自动设置，无需任何手动配置。
 
-- Swap SR, RR, FG, and Streamline versions per game from a dropdown. Every version from 2.x to current, plus Custom.
-- Original DLLs backed up automatically. Restore the originals any time.
-- Set global defaults once — Quick Apply pushes them to any game in one click.
-- Batch Deploy: select multiple games from a checklist and push versions, presets, and render scales to all of them at once.
-- DLSS presets (J/K/L/M for SR, D/E for RR, A/B for FG) written directly to NVIDIA driver profiles. No Profile Inspector needed.
-- **DLSS SR Render Scale Override** — force 33–100% render resolution per game.
-- **NVIDIA Override** — set the driver's "Latest DLL" flag per component directly from the version dropdown, equivalent to enabling it in NVIDIA App or Profile Inspector.
-- Auto-update for DLSS SR, RR, and FG from the RHI manifest. Opt-in per-game.
+### DLSS 5 与神经渲染
 
-### Multi Frame Generation
+- **DLSS5 Feeder** — 一键完整流水线安装：部署 feeder 插件、DLSS5 消费端、`nvngx_dlss.dll`、`nvngx_dlssnr.dll`、预配置的 `ReShadePreset.ini` 和所需着色器包。为您的游戏自动选择正确的方法（32位、DX11、DX12）。
+- **ShortFuse DLSS Tool** — DX12 游戏的替代神经渲染实现。
+- **DX11 Bridge 变体** — DLSS5 Tool + 桥接，适用于需要 DX11 兼容性的游戏。
+- **NR Cost Scaler** — 包装 `nvngx_dlssnr.dll` 以降低成本运行神经渲染（默认75%）。在安装方法前切换可自动部署。
 
-- **RTX 40 MFG Unlock** — enables DLSS MFG multipliers beyond 2x (up to 6x) on RTX 40 Series via Ultimate ASI Loader. One-click install from the Extras section.
-- **MFG Ada Unlock** — in-memory MFG unlock addon for RTX 40 Series via the addon manager.
-- **RTX 50 Series MFG** — configure Fixed or Dynamic MFG mode, frame count (2x–6x), and dynamic target frame rate from the DLSS section.
+### DLSS 和 Streamline 版本管理器
+
+- 从下拉菜单按游戏切换 SR、RR、FG 和 Streamline 版本。从 2.x 到当前的所有版本，外加自定义。
+- 自动备份原始 DLL。随时可恢复原文件。
+- 设置一次全局默认值 — 快速应用一键推送到任意游戏。
+- 批量部署：从清单中选择多个游戏，一次推送版本、预设和渲染比例。
+- DLSS 预设（SR 用 J/K/L/M，RR 用 D/E，FG 用 A/B）直接写入 NVIDIA 驱动配置。无需 Profile Inspector。
+- **DLSS SR 渲染比例覆盖** — 按游戏强制 33–100% 渲染分辨率。
+- **NVIDIA 覆盖** — 直接从版本下拉菜单设置驱动的"最新 DLL"标志，等同于在 NVIDIA App 或 Profile Inspector 中启用。
+- 从 RHI 清单自动更新 DLSS SR、RR 和 FG。按游戏选择启用。
+
+### 多帧生成
+
+- **RTX 40 MFG 解锁** — 通过 Ultimate ASI Loader 在 RTX 40 系列上启用超过2倍的 DLSS MFG 倍率（最高6倍）。从附加功能部分一键安装。
+- **MFG Ada Unlock** — 通过插件管理器为 RTX 40 系列提供内存中 MFG 解锁插件。
+- **RTX 50 系列 MFG** — 从 DLSS 部分配置固定或动态 MFG 模式、帧数（2倍–6倍）和动态目标帧率。
 
 ### OptiScaler
 
-- Redirects DLSS API calls to FSR4/FSR3/XeSS for AMD and Intel GPUs, and adds frame generation support where the game doesn't have it.
-- **Stable and Nightly channels** per game, selectable in the cog.
-- **Per-GPU INI templates** — six pre-configured templates (NVIDIA, AMD+DLSS, AMD no-DLSS, each in Stable and Nightly). Seeded on first launch, user-editable, never overwritten.
-- **Streamline + DLSS Enabler deploy** (Nightly) — toggle per game to deploy Streamline DLLs and DLSS Enabler to the OptiScaler folder. Pick the Streamline version per game.
-- Frame Generation settings: FG Input, FG Output, FG Nvngx Replacement, HUD Fix — all configurable in the cog.
-- **OptiPatcher** auto-deployed to all games with OptiScaler installed. Auto-updates silently.
-- ReShade coexistence handled automatically — filenames adjusted, `LoadReshade=true` set.
+- 将 DLSS API 调用重定向到 FSR4/FSR3/XeSS（适用于 AMD 和 Intel 显卡），并在游戏没有帧生成支持时添加帧生成。
+- 每游戏可选**稳定版和夜间版通道**，在齿轮中选择。
+- **每 GPU INI 模板** — 六个预配置模板（NVIDIA、AMD+DLSS、AMD 无DLSS，各分稳定版和夜间版）。首次启动时初始化，用户可编辑，永不覆盖。
+- **Streamline + DLSS Enabler 部署**（夜间版）— 按游戏切换，将 Streamline DLL 和 DLSS Enabler 部署到 OptiScaler 文件夹。按游戏选择 Streamline 版本。
+- 帧生成设置：FG 输入、FG 输出、FG Nvngx 替换、HUD 修复 — 全部可在齿轮中配置。
+- **OptiPatcher** 自动部署到所有安装了 OptiScaler 的游戏。静默自动更新。
+- 自动处理 ReShade 共存 — 自动调整文件名，设置 `LoadReshade=true`。
 
-### Frame Limiters
+### 帧率限制器
 
-Two per-game frame limiters, mutually exclusive:
+两个每游戏帧率限制器，互斥：
 
-- **[ReLimiter](https://github.com/RankFTW/ReLimiter)** — precision frame pacing with predictive sleep, phase-locked timing grid, and closed-loop correction. VRR-aware, DLSS FG adaptive, Reflex-integrated.
-- **[Display Commander](https://github.com/pmnoxx/display-commander)** — alternative limiter supporting both 32-bit and 64-bit games.
+- **[ReLimiter](https://github.com/RankFTW/ReLimiter)** — 精确帧率调节，具备预测休眠、锁相计时网格和闭环校正。VRR 感知、DLSS FG 自适应、集成 Reflex。
+- **[Display Commander](https://github.com/pmnoxx/display-commander)** — 支持同时用于32位和64位游戏的替代限制器。
 
-Both deploy as ReShade addons. Both participate in Update All.
+两者都作为 ReShade 插件部署。两者都参与全部更新。
 
-### NVIDIA Driver Profile Management — Replaces NVIDIA App and Profile Inspector
+### NVIDIA 驱动配置管理 — 取代 NVIDIA App 和 Profile Inspector
 
-All per-game driver settings written directly via NvAPI. No NVIDIA Profile Inspector, no NVIDIA App needed.
+所有每游戏驱动设置直接通过 NvAPI 写入。无需 NVIDIA Profile Inspector，无需 NVIDIA App。
 
-**Per-game overrides:**
-- VSync Mode, Tear Control, Low Latency (Off/On/Ultra)
-- Smooth Motion: Enable, Allowed APIs, Flip Pacing — automatically sets Low Latency to Ultra when enabled
-- Power Management Mode
-- G-Sync per-game toggle
-- ReBAR: Enable (Off/On/Auto), Mode (Standard/Optimized), Size Limit
-- RTX HDR: Enable/Configure with Peak Brightness, Contrast, Saturation, Middle Grey, Debanding
-- DLSS Presets and Render Scale Override (no admin required)
+**每游戏覆盖：**
+- 垂直同步模式、撕裂控制、低延迟（关/开/Ultra）
+- 平滑运动：启用、允许的 API、翻转调节 — 启用时自动将低延迟设置为 Ultra
+- 电源管理模式
+- 每游戏 G-Sync 开关
+- ReBAR：启用（关/开/自动）、模式（标准/优化）、大小限制
+- RTX HDR：启用/配置，带峰值亮度、对比度、饱和度、中间灰、去色带
+- DLSS 预设和渲染比例覆盖（无需管理员）
 
-**Global settings (base profile):**
-- Shader Cache Size and Pre-Compile
-- G-Sync Mode and Preferred Refresh Rate
-- Global ReBAR
-- FPS Limit (Frame Rate Limiter V3)
-- Digital Vibrance per display — restored automatically on every app startup
+**全局设置（基础配置）：**
+- 着色器缓存大小和预编译
+- G-Sync 模式和首选刷新率
+- 全局 ReBAR
+- 帧率限制（帧率限制器 V3）
+- 每显示器数字 vibrance — 每次应用启动时自动恢复
 
-**Export/Import:** back up all per-game NVIDIA profiles to a JSON file. Import restores everything after a driver reinstall.
+**导出/导入：**将所有每游戏 NVIDIA 配置备份到 JSON 文件。驱动重装后导入恢复所有内容。
 
-### HDR Auto-Toggle
+### HDR 自动开关
 
-Enables Windows HDR when you launch a game through RHI and disables it when the game closes. Works with Steam, Epic, Xbox, and direct exe launches. Per-game override button next to Launch — purple when active.
+通过 RHI 启动游戏时启用 Windows HDR，游戏关闭时禁用。适用于 Steam、Epic、Xbox 和直接 exe 启动。启动按钮旁有每游戏覆盖按钮 — 激活时显示紫色。
 
-### Shader Pack Management — 46 Packs
+### 着色器包管理 — 46 个包
 
-Every shader pack you'd ever want, all managed in one place:
+您想要的所有着色器包，全部在一处管理：
 
-- **Essential**: Lilium HDR Shaders (EndlesslyFlowering) — required for HDR tone mapping
-- **Recommended**: crosire reshade-shaders, PumboAutoHDR, MaxG2D Simple HDR, clshortfuse shaders, RenoFX HDR Toolkit, smolbbsoop shaders
-- **Extra**: 39 additional packs — SweetFX, OtisFX, qUINT, iMMERSE, Prod80, CorgiFX, ZenteonFX, CRT-Royale, VRToolkit, GShade-Shaders, QD-OLED APL Fixer, LumaBoost, and more
+- **必备**：Lilium HDR 着色器（EndlesslyFlowering）— HDR 色调映射所需
+- **推荐**：crosire reshade-shaders、PumboAutoHDR、MaxG2D Simple HDR、clshortfuse 着色器、RenoFX HDR 工具包、smolbbsoop 着色器
+- **附加**：39 个额外的包 — SweetFX、OtisFX、qUINT、iMMERSE、Prod80、CorgiFX、ZenteonFX、CRT-Royale、VRToolkit、GShade-Shaders、QD-OLED APL Fixer、LumaBoost 等
 
-Select packs globally or override per game. Expand any pack to pick individual `.fx` files — tri-state checkbox for partial selection. Save selections as named profiles, export as zip, share directly into Discord.
+全局选择包或按游戏覆盖。展开任意包可挑选单个 `.fx` 文件 — 三态复选框支持部分选择。将选择保存为命名配置，导出为 zip，直接分享到 Discord。
 
-Custom shaders go in `%LocalAppData%\RHI\Custom\reshade\Shaders\` — RHI deploys them alongside managed packs.
+自定义着色器放在 `%LocalAppData%\RHI\Custom\reshade\Shaders\` — RHI 将其与托管的包一起部署。
 
-### ReShade Addon Management
+### ReShade 插件管理
 
-Global addon manager from the toolbar. Enable/disable per game or globally. Custom addons in `%LocalAppData%\RHI\Custom\Addons\` automatically appear in the picker.
+工具栏中的全局插件管理器。按游戏或全局启用/禁用。`%LocalAppData%\RHI\Custom\Addons\` 中的自定义插件自动出现在选择器中。
 
-### Update All
+### 全部更新
 
-One button in the toolbar updates ReShade, RenoDX, ReLimiter, Display Commander, OptiScaler, and RE Framework across your entire library. Per-game update exclusions respected. Lights up purple when updates are available.
+工具栏中的一个按钮可更新整个游戏库的 ReShade、RenoDX、ReLimiter、Display Commander、OptiScaler 和 RE Framework。遵守每游戏更新排除设置。有可用更新时显示紫色。
 
-Background check every 4 hours while running — works from the system tray without keeping the window open.
+运行时每4小时后台检查 — 可从系统托盘工作，无需保持窗口打开。
 
-### Manifest-Driven Updates
+### 清单驱动的更新
 
-Game data, mod links, Engine.ini configurations, launch fixes, and feature flags are all driven by a manifest fetched from GitHub on every launch. This means:
+游戏数据、模组链接、Engine.ini 配置、启动修复和功能标志都由每次启动时从 GitHub 获取的清单驱动。这意味着：
 
-- New game support, fixes, and tweaks deploy to all users immediately — no app update needed
-- Per-game Engine.ini overrides (like Black Myth: Wukong's custom HDR keys) delivered server-side
-- Feature flags enable dev-preview features for all users via manifest toggle
+- 新游戏支持、修复和调整立即部署到所有用户 — 无需更新应用
+- 每游戏 Engine.ini 覆盖（如《黑神话：悟空》的自定义 HDR 键值）通过服务端交付
+- 功能标志通过清单切换为所有用户启用开发者预览功能
 
 ---
 
-## Supported Stores
+## 支持的平台
 
 Steam · Epic Games · GOG · Xbox / Game Pass · EA App · Ubisoft Connect · Battle.net · Rockstar · itch.io
 
-Drag and drop any game's `.exe` onto the window to add it manually if it's not auto-detected.
+如果游戏未被自动检测到，可将任意游戏的 `.exe` 拖放到窗口上手动添加。
 
 ---
 
-## Requirements
+## 系统要求
 
 - Windows 10 / 11
-- [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0)
-- NVIDIA GPU recommended for driver profile features (ReShade and RenoDX work on all GPUs)
-- Admin mode required for: ReBAR, Smooth Motion, Low Latency (Ultra), Vulkan ReShade, driver export/import
+- [.NET 8 桌面运行时](https://dotnet.microsoft.com/download/dotnet/8.0)
+- 驱动配置功能推荐 NVIDIA 显卡（ReShade 和 RenoDX 支持所有显卡）
+- 以下功能需要管理员模式：ReBAR、平滑运动、低延迟（Ultra）、Vulkan ReShade、驱动导出/导入
 
 ---
 
-## Third-Party Components
+## 第三方组件
 
-| Component | Author |
+| 组件 | 作者 |
 |-----------|--------|
 | [ReShade](https://reshade.me) | Crosire |
-| [RenoDX](https://github.com/clshortfuse/renodx) | clshortfuse & contributors |
+| [RenoDX](https://github.com/clshortfuse/renodx) | clshortfuse 及贡献者 |
 | [ReLimiter](https://github.com/RankFTW/ReLimiter) | RankFTW |
 | [Display Commander](https://github.com/pmnoxx/display-commander) | pmnoxx |
 | [RE Framework](https://github.com/praydog/REFramework-nightly) | praydog |
-| [Luma Framework](https://github.com/Filoppi/Luma-Framework) | Pumbo (Filoppi) |
-| [OptiScaler](https://github.com/optiscaler/OptiScaler) | OptiScaler contributors |
-| [DXVK](https://github.com/doitsujin/dxvk) | doitsujin & contributors |
+| [Luma 框架](https://github.com/Filoppi/Luma-Framework) | Pumbo (Filoppi) |
+| [OptiScaler](https://github.com/optiscaler/OptiScaler) | OptiScaler 贡献者 |
+| [DXVK](https://github.com/doitsujin/dxvk) | doitsujin 及贡献者 |
 | [DXVK HDR-mod](https://github.com/EndlesslyFlowering/dxvk) | EndlesslyFlowering (Lilium) |
 | [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) | ThirteenAG |

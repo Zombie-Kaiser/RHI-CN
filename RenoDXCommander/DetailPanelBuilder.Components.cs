@@ -163,7 +163,7 @@ public partial class DetailPanelBuilder
                 }
                 else
                 {
-                    _window.DetailRsStatus.Text = "Ready";
+                    _window.DetailRsStatus.Text = "就绪";
                     _window.DetailRsStatus.Foreground = UIFactory.GetBrush("#A0AABB");
                     _window.DetailRsStatus.TextDecorations = Windows.UI.Text.TextDecorations.None;
                 }

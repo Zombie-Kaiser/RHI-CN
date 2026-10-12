@@ -1,4 +1,4 @@
-// MainWindow.Events.cs — Button click handlers and user-initiated event handlers.
+﻿// MainWindow.Events.cs — Button click handlers and user-initiated event handlers.
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI;
@@ -28,18 +28,18 @@ public sealed partial class MainWindow
 
         var dialog = new ContentDialog
         {
-            Title = "Full Refresh",
-            Content = "This will clear all caches and re-scan everything from scratch:\n\n" +
-                      "• Re-detects all games from every storefront\n" +
-                      "• Re-scans DLSS/Streamline DLL paths\n" +
-                      "• Re-detects graphics APIs and engine types\n" +
-                      "• Rebuilds shader and addon deployment state\n\n" +
-                      "Try a normal Refresh first — it handles most issues without the full rescan. " +
-                      "Use Full Refresh as a last resort if games are missing, paths have changed, DLSS has been added to a game, or the DLSS section is missing from a game card.\n\n" +
-                      "The next couple of restarts may take a few seconds longer while caches are rebuilt.\n\n" +
-                      "Do not close RHI while the refresh is in progress — closing early will result in a missing library and the scan will need to be repeated.",
-            PrimaryButtonText = "Continue",
-            CloseButtonText = "Cancel",
+            Title = "完整刷新",
+            Content = "这将清除所有缓存并从头重新扫描所有内容：\n\n" +
+                      "• 从每个商店重新检测所有游戏\n" +
+                      "• 重新扫描 DLSS/Streamline DLL 路径\n" +
+                      "• 重新检测图形 API 和引擎类型\n" +
+                      "• 重建着色器和附加组件部署状态\n\n" +
+                      "先尝试普通刷新 — 它能处理大多数问题而无需完全重新扫描。 " +
+                      "如果游戏缺失、路径已更改、DLSS 已添加到游戏或游戏卡片中缺少 DLSS 部分，作为最后手段使用完整刷新。\n\n" +
+                      "接下来的几次重启可能需要多花几秒钟来重建缓存。\n\n" +
+                      "刷新进行时请勿关闭 RHI — 提前关闭将导致库缺失，需要重复扫描。",
+            PrimaryButtonText = "继续",
+            CloseButtonText = "取消",
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = Content.XamlRoot,
             RequestedTheme  = ElementTheme.Dark,
@@ -59,7 +59,7 @@ public sealed partial class MainWindow
         var progressPanel = new StackPanel { Spacing = 8 };
         var progressRow = new StackPanel { Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal, Spacing = 12 };
         var progressRing = new ProgressRing { IsActive = true, Width = 20, Height = 20 };
-        var progressText = new TextBlock { Text = "Fetching manifest...", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) };
+        var progressText = new TextBlock { Text = "正在获取清单...", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) };
         progressRow.Children.Add(progressRing);
         progressRow.Children.Add(progressText);
         progressPanel.Children.Add(progressRow);
@@ -189,7 +189,7 @@ public sealed partial class MainWindow
         {
             content.Children.Add(new TextBlock
             {
-                Text = "Engine.ini Settings",
+                Text = "Engine.ini 设置",
                 FontSize = 13,
                 Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
                 Margin = new Thickness(0, 0, 0, 4),
@@ -307,7 +307,7 @@ public sealed partial class MainWindow
         {
             Title = "Luma Settings",
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = this.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -368,9 +368,9 @@ public sealed partial class MainWindow
         {
             await DialogService.ShowSafeAsync(new ContentDialog
             {
-                Title = "Support the Mod Authors",
-                Content = "No donation links available.",
-                CloseButtonText = "Close",
+                Title = "支持模组作者",
+                Content = "没有可用的捐赠链接。",
+                CloseButtonText = "关闭",
                 XamlRoot = Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             });
@@ -382,7 +382,7 @@ public sealed partial class MainWindow
 
         var intro = new TextBlock
         {
-            Text = "These are the people who make the mods RHI manages. If you enjoy their work, consider supporting them.",
+            Text = "这些是制作 RHI 管理的模组的人。如果您喜欢他们的作品，请考虑支持他们。",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             TextWrapping = TextWrapping.Wrap,
@@ -479,7 +479,7 @@ public sealed partial class MainWindow
         {
             Title = "❤ Support the Mod Authors",
             Content = scroll,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = Content.XamlRoot,
             Background = UIFactory.Brush(ResourceKeys.SurfaceToolbarBrush),
             RequestedTheme = ElementTheme.Dark,
@@ -740,7 +740,7 @@ public sealed partial class MainWindow
         // ── Open Folder ──
         var openFolderItem = new MenuFlyoutItem
         {
-            Text = "Open Folder",
+            Text = "打开文件夹",
             Tag = card,
         };
         openFolderItem.Click += CardOpenFolder_Click;
@@ -771,7 +771,7 @@ public sealed partial class MainWindow
         {
             var discussionItem = new MenuFlyoutItem
             {
-                Text = "Discussion / Instructions",
+                Text = "讨论 / 说明",
                 Tag = card,
             };
             discussionItem.Click += async (s, ev) =>
@@ -787,7 +787,7 @@ public sealed partial class MainWindow
         {
             var notesItem = new MenuFlyoutItem
             {
-                Text = "View Notes",
+                Text = "查看说明",
                 Tag = card,
             };
             notesItem.Click += async (s, ev) =>
@@ -804,7 +804,7 @@ public sealed partial class MainWindow
         menu.Items.Add(new MenuFlyoutSeparator());
         var shortcutItem = new MenuFlyoutItem
         {
-            Text = "Create Desktop Shortcut",
+            Text = "创建桌面快捷方式",
             Tag  = card,
         };
         shortcutItem.Click += async (s, ev) => await CreateDesktopShortcutAsync(card);
@@ -1008,7 +1008,7 @@ public sealed partial class MainWindow
         var currentQuery = SearchBox.Text?.Trim() ?? "";
         if (string.IsNullOrEmpty(currentQuery)) return;
 
-        var nameBox = new TextBox { PlaceholderText = "Filter name", Text = currentQuery, Width = 350 };
+        var nameBox = new TextBox { PlaceholderText = "过滤器名称", Text = currentQuery, Width = 350 };
         var errorText = new TextBlock
         {
             Text = "",
@@ -1020,7 +1020,7 @@ public sealed partial class MainWindow
 
         var dialog = new ContentDialog
         {
-            Title = "Save Custom Filter",
+            Title = "保存自定义过滤器",
             Content = new StackPanel
             {
                 Spacing = 8,
@@ -1036,7 +1036,7 @@ public sealed partial class MainWindow
                     errorText,
                 }
             },
-            PrimaryButtonText = "Save",
+            PrimaryButtonText = "保存",
             CloseButtonText = "Cancel",
             XamlRoot = Content.XamlRoot,
             Background = Brush(ResourceKeys.SurfaceToolbarBrush),
@@ -1049,7 +1049,7 @@ public sealed partial class MainWindow
             var name = nameBox.Text?.Trim() ?? "";
             if (string.IsNullOrEmpty(name))
             {
-                errorText.Text = "Please enter a filter name.";
+                errorText.Text = "请输入过滤器名称。";
                 errorText.Visibility = Visibility.Visible;
                 args.Cancel = true;
                 return;
@@ -1111,7 +1111,7 @@ public sealed partial class MainWindow
 
             // Right-click context menu with "Delete" option (Req 5.1–5.5)
             var flyout = new MenuFlyout();
-            var deleteItem = new MenuFlyoutItem { Text = "Delete" };
+            var deleteItem = new MenuFlyoutItem { Text = "删除" };
             deleteItem.Click += (s, args) =>
             {
                 ViewModel.Filter.RemoveCustomFilter(chipName);
@@ -1181,18 +1181,18 @@ public sealed partial class MainWindow
         nameBox.SelectAll();
         var nameDialog = new ContentDialog
         {
-            Title           = "Name This Game",
+            Title           = "命名此游戏",
             Content         = new StackPanel
             {
                 Spacing = 10,
                 Children =
                 {
                     new TextBlock { Text = $"Selected: {filePath}", TextWrapping = TextWrapping.Wrap, Foreground = Brush(ResourceKeys.TextSecondaryBrush), FontSize = 11 },
-                    new TextBlock { Text = "Enter the game name:", TextWrapping = TextWrapping.Wrap, Foreground = Brush(ResourceKeys.TextSecondaryBrush) },
+                    new TextBlock { Text = "输入游戏名称：", TextWrapping = TextWrapping.Wrap, Foreground = Brush(ResourceKeys.TextSecondaryBrush) },
                     nameBox
                 }
             },
-            PrimaryButtonText   = "Add Game",
+            PrimaryButtonText   = "添加游戏",
             CloseButtonText     = "Cancel",
             XamlRoot            = Content.XamlRoot,
             Background          = Brush(ResourceKeys.SurfaceToolbarBrush),

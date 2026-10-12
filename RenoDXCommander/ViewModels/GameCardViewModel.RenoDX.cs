@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using RenoDXCommander.Models;
 
@@ -14,13 +14,13 @@ public partial class GameCardViewModel
         get
         {
             if (IsInstalling) return "Installing...";
-            if (IsRtxHdrEnabled) return "Configure RTX HDR";
-            if (IsAutoHdrEnabled) return "Configure Auto HDR";
+            if (IsRtxHdrEnabled) return "配置 RTX HDR";
+            if (IsAutoHdrEnabled) return "配置 Auto HDR";
             if (!IsRsInstalled && !ExcludeFromUpdateAllReShade && Mod?.SnapshotUrl != null && !IsExternalOnly)
                 return "⚠  ReShade required";
             // No mod available and nothing manually installed
             if (Mod?.SnapshotUrl == null && !IsExternalOnly && string.IsNullOrEmpty(InstalledAddonFileName))
-                return "No RenoDX mod available";
+                return "暂无可用的RenoDX模组";
             var name = UseUeExtended ? "UE-Extended" : "RenoDX";
             return Status == GameStatus.UpdateAvailable ? $"⬆  Update {name}"
                  : Status == GameStatus.Installed       ? $"↺  Reinstall {name}"

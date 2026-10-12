@@ -1,4 +1,4 @@
-// MainWindow.Events.Install.cs — Update All, DXVK, DOF Fix, engine badge, game launch, and scroll restore handlers.
+﻿// MainWindow.Events.Install.cs — Update All, DXVK, DOF Fix, engine badge, game launch, and scroll restore handlers.
 
 using System.Diagnostics;
 using Microsoft.UI;
@@ -21,7 +21,7 @@ public sealed partial class MainWindow
         // Build the progress dialog
         var statusText = new TextBlock
         {
-            Text = "Preparing...",
+            Text = "准备中...",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
@@ -39,7 +39,7 @@ public sealed partial class MainWindow
 
         var dialog = new ContentDialog
         {
-            Title = "Updating All Components",
+            Title = "正在更新所有组件",
             Content = panel,
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -52,39 +52,39 @@ public sealed partial class MainWindow
         {
             if (!ViewModel.Settings.GlobalSkipRsUpdates)
             {
-                statusText.Text = "Updating ReShade...";
+                statusText.Text = "正在更新 ReShade...";
                 await ViewModel.UpdateAllReShadeAsync();
             }
             if (!ViewModel.Settings.GlobalSkipRdxUpdates)
             {
-                statusText.Text = "Updating RenoDX...";
+                statusText.Text = "正在更新 RenoDX...";
                 await ViewModel.UpdateAllRenoDxAsync();
             }
             if (!ViewModel.Settings.GlobalSkipUlUpdates)
             {
-                statusText.Text = "Updating ReLimiter...";
+                statusText.Text = "正在更新 ReLimiter...";
                 await ViewModel.UpdateAllUlAsync();
             }
             if (!ViewModel.Settings.GlobalSkipDcUpdates)
             {
-                statusText.Text = "Updating Display Commander...";
+                statusText.Text = "正在更新 Display Commander...";
                 await ViewModel.UpdateAllDcAsync();
             }
             if (!ViewModel.Settings.GlobalSkipOsUpdates)
             {
-                statusText.Text = "Updating OptiScaler...";
+                statusText.Text = "正在更新 OptiScaler...";
                 await ViewModel.UpdateAllOsAsync();
             }
             if (!ViewModel.Settings.GlobalSkipRefUpdates)
             {
-                statusText.Text = "Updating RE Framework...";
+                statusText.Text = "正在更新 RE Framework...";
                 await ViewModel.UpdateAllRefAsync();
             }
-            statusText.Text = "Updating DXVK...";
+            statusText.Text = "正在更新 DXVK...";
             await ViewModel.UpdateAllDxvkAsync();
-            statusText.Text = "Updating Luma...";
+            statusText.Text = "正在更新 Luma...";
             await ViewModel.UpdateAllLumaAsync();
-            statusText.Text = "Updating DOF Fix...";
+            statusText.Text = "正在更新景深修复...";
             await ViewModel.UpdateAllDofFixAsync();
         }
         catch (Exception ex)
@@ -306,7 +306,7 @@ public sealed partial class MainWindow
         if (card.DofFixIsInstalling || string.IsNullOrEmpty(card.InstallPath)) return;
 
         card.DofFixIsInstalling = true;
-        card.DofFixActionMessage = "Installing DOF Fix...";
+        card.DofFixActionMessage = "正在安装景深修复...";
         card.DofFixProgress = 0;
         try
         {
@@ -377,7 +377,7 @@ public sealed partial class MainWindow
             {
                 Content = new TextBlock
                 {
-                    Text = notes ?? "No release notes available.",
+                    Text = notes ?? "暂无发布说明。",
                     TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                     IsTextSelectionEnabled = true,
                 },
@@ -397,7 +397,7 @@ public sealed partial class MainWindow
             Title = "DOF Fix Settings",
             Content = new TextBlock
             {
-                Text = "No configurable settings available for this component.",
+                Text = "此组件没有可配置的设置。",
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
             },
             CloseButtonText = "OK",
@@ -497,14 +497,14 @@ public sealed partial class MainWindow
         {
             var dontShowCheck = new CheckBox
             {
-                Content = "Don't show this again",
+                Content = "不再显示",
                 FontSize = 12,
                 Margin = new Thickness(0, 8, 0, 0),
             };
             var panel = new StackPanel { Spacing = 8 };
             panel.Children.Add(new TextBlock
             {
-                Text = "This toggles the engine version to Unreal Engine 5.0–5.6, making this game eligible for the DOF Fix addon.\n\nUse this when RHI cannot detect the UE version automatically (e.g. Game Pass games).",
+                Text = "此开关将引擎版本切换为虚幻引擎 5.0–5.6，使此游戏可以使用 DOF Fix 附加组件。\n\n当 RHI 无法自动检测 UE 版本时使用（如 Game Pass 游戏）。",
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                 FontSize = 12,
             });
@@ -512,7 +512,7 @@ public sealed partial class MainWindow
 
             var dialog = new ContentDialog
             {
-                Title = "Engine Version Override",
+                Title = "引擎版本覆盖",
                 Content = panel,
                 PrimaryButtonText = "Continue",
                 CloseButtonText = "Cancel",
@@ -1088,7 +1088,7 @@ public sealed partial class MainWindow
 
                 var uninstallCheck = new CheckBox
                 {
-                    Content = "Also uninstall all RHI-managed components from game folder",
+                    Content = "同时从游戏文件夹卸载所有 RHI 管理的组件",
                     FontSize = 12,
                     IsChecked = false,
                 };
@@ -1096,9 +1096,9 @@ public sealed partial class MainWindow
 
                 var dialog = new ContentDialog
                 {
-                    Title = "Remove Game",
+                    Title = "移除游戏",
                     Content = panel,
-                    PrimaryButtonText = "Remove",
+                    PrimaryButtonText = "移除",
                     CloseButtonText = "Cancel",
                     XamlRoot = Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
@@ -1112,14 +1112,14 @@ public sealed partial class MainWindow
                 // No components installed — simple confirm
                 var dialog = new ContentDialog
                 {
-                    Title = "Remove Game",
+                    Title = "移除游戏",
                     Content = new TextBlock
                     {
                         Text = $"Remove {card.GameName} from RHI?",
                         FontSize = 12,
                         TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                     },
-                    PrimaryButtonText = "Remove",
+                    PrimaryButtonText = "移除",
                     CloseButtonText = "Cancel",
                     XamlRoot = Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
@@ -1182,14 +1182,14 @@ public sealed partial class MainWindow
         var progressPanel = new StackPanel { Spacing = 8 };
         var progressRow = new StackPanel { Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal, Spacing = 12 };
         var progressRing = new ProgressRing { IsActive = true, Width = 20, Height = 20 };
-        var progressText = new TextBlock { Text = "Clearing caches...", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) };
+        var progressText = new TextBlock { Text = "正在清除缓存...", FontSize = 13, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush) };
         progressRow.Children.Add(progressRing);
         progressRow.Children.Add(progressText);
         progressPanel.Children.Add(progressRow);
 
         var progressDialog = new ContentDialog
         {
-            Title = "Full Refresh",
+            Title = "完整刷新",
             Content = progressPanel,
             XamlRoot = Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,

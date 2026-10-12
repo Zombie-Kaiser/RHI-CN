@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -206,7 +206,7 @@ public class InstallEventHandler
                 var warningDialog = new ContentDialog
                 {
                     Title = "⚠ OptiScaler Setup",
-                    Content = "Before installing OptiScaler, please configure your GPU type and DLSS input (AMD/Intel only) settings in the OptiScaler Settings section on the Settings page.\n\nThis ensures OptiScaler is configured correctly for your hardware.",
+                    Content = "安装 OptiScaler 前，请在设置页的 OptiScaler 设置部分配置 GPU 类型和 DLSS 输入（仅 AMD/Intel）设置。\n\n这确保 OptiScaler 为您的硬件正确配置。",
                     PrimaryButtonText = "Continue",
                     CloseButtonText = "Cancel",
                     XamlRoot = xamlRoot,
@@ -227,7 +227,7 @@ public class InstallEventHandler
         var osVariant = ViewModel.GetOsVariant(card.GameName, card.Source ?? "");
 
         card.OsIsInstalling = true;
-        card.OsActionMessage = "Installing OptiScaler...";
+        card.OsActionMessage = "正在安装 OptiScaler...";
         card.OsProgress = 0;
         AuxInstalledRecord? osRecord = null;
         try
@@ -260,7 +260,7 @@ public class InstallEventHandler
             {
                 try
                 {
-                    card.OsActionMessage = "Installing PD-Upscaler REFramework...";
+                    card.OsActionMessage = "正在安装 PD-Upscaler REFramework...";
                     await _reFrameworkService.InstallPdUpscalerAsync(
                         card.GameName, card.InstallPath, pdArtifact,
                         new Progress<(string message, double percent)>(p =>
@@ -554,7 +554,7 @@ public class InstallEventHandler
 
         // Update tooltip
         ToolTipService.SetToolTip(_window.DetailUeExtendedBtn,
-            card.UseUeExtended ? "Disable UE Extended" : "Enable UE Extended");
+            card.UseUeExtended ? "禁用 UE Extended" : "启用 UE Extended");
 
         // Show inline message or warning dialog
         if (card.UseUeExtended)
@@ -598,16 +598,16 @@ public class InstallEventHandler
 
         var dontShowCheck = new CheckBox
         {
-            Content = "Don't show this again",
+            Content = "不再显示",
             FontSize = 12,
             Margin = new Thickness(0, 12, 0, 0),
         };
 
         var messageText = new TextBlock
         {
-            Text = "Heads up — you're installing both RenoDX and Luma on this game.\n\n" +
-                   "There's no guarantee they'll work well together. If you're using RenoDX for HDR and just want Luma for DLAA, make sure to disable HDR in the Luma mod settings to avoid conflicts.\n\n" +
-                   "If something doesn't look right, uninstalling one of them is the first thing to try. We can't offer support for issues that come from running both together.",
+            Text = "注意 — 您正在此游戏上同时安装 RenoDX 和 Luma。\n\n" +
+                   "不保证两者能良好协作。如果您使用 RenoDX 实现 HDR，仅用 Luma 实现 DLAA，请确保在 Luma 模组设置中禁用 HDR 以避免冲突。\n\n" +
+                   "如果显示不正常，请先尝试卸载其中一个。我们无法为同时运行两者产生的问题提供支持。",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 13,
             LineHeight = 22,
@@ -620,7 +620,7 @@ public class InstallEventHandler
 
         var dialog = new ContentDialog
         {
-            Title = "Installing both RenoDX and Luma",
+            Title = "同时安装 RenoDX 和 Luma",
             Content = content,
             PrimaryButtonText = "Continue",
             CloseButtonText = "Cancel",

@@ -26,18 +26,18 @@ public static class GameReportEncoder
         // Gatekeep: ask user to correct overrides first
         var gateDlg = new ContentDialog
         {
-            Title = "Before you submit",
+            Title = "提交前",
             Content = new TextBlock
             {
-                Text = "Please use the overrides on this panel to correct any wrong values " +
-                       "(bitness, graphics API, game name, etc.) before generating a report. " +
-                       "This helps us update the manifest faster.\n\n" +
-                       "Have you corrected everything you can?",
+                Text = "请使用此面板上的覆盖来更正任何错误的值 " +
+                       "（位数、图形 API、游戏名称等），然后再生成报告。 " +
+                       "这有助于我们更快地更新清单。\n\n" +
+                       "您已更正了所有能更正的内容吗？",
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = 12,
             },
-            PrimaryButtonText = "Yes, continue",
-            CloseButtonText = "Go back",
+            PrimaryButtonText = "是，继续",
+            CloseButtonText = "返回",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -48,7 +48,7 @@ public static class GameReportEncoder
         // Show dialog with optional note
         var noteBox = new TextBox
         {
-            PlaceholderText = "Describe the issue (optional)",
+            PlaceholderText = "描述问题（可选）",
             AcceptsReturn = true,
             TextWrapping = TextWrapping.Wrap,
             MinHeight = 80,
@@ -65,8 +65,8 @@ public static class GameReportEncoder
                 {
                     new TextBlock
                     {
-                        Text = "This saves a report file and copies it to your clipboard. " +
-                               "Paste it directly into Discord or attach it to a GitHub issue.",
+                        Text = "这将保存报告文件并复制到剪贴板。 " +
+                               "直接粘贴到 Discord 或附加到 GitHub issue。",
                         TextWrapping = TextWrapping.Wrap,
                         FontSize = 12,
                         Opacity = 0.7,

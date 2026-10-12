@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using RenoDXCommander.Services;
@@ -50,7 +50,7 @@ public static class PresetPopupHelper
 
             var emptyDlg = new ContentDialog
             {
-                Title = "Select ReShade Presets",
+                Title = "选择 ReShade 预设",
                 Content = new StackPanel
                 {
                     Spacing = 8,
@@ -58,13 +58,13 @@ public static class PresetPopupHelper
                     {
                         new TextBlock
                         {
-                            Text = "No preset files found.",
+                            Text = "未找到预设文件。",
                             FontSize = 13,
                             Foreground = Brush(ResourceKeys.TextPrimaryBrush),
                         },
                         new TextBlock
                         {
-                            Text = "Place .ini files in:",
+                            Text = "将 .ini 文件放在：",
                             FontSize = 11,
                             Opacity = 0.6,
                             Foreground = Brush(ResourceKeys.TextPrimaryBrush),
@@ -72,7 +72,7 @@ public static class PresetPopupHelper
                         emptyPathLink,
                     },
                 },
-                PrimaryButtonText = "Open Folder",
+                PrimaryButtonText = "打开文件夹",
                 CloseButtonText = "Cancel",
                 XamlRoot = xamlRoot,
                 Background = Brush(ResourceKeys.SurfaceOverlayBrush),
@@ -100,7 +100,7 @@ public static class PresetPopupHelper
             TextWrapping = TextWrapping.Wrap,
             Margin = new Thickness(0, 0, 0, 6),
         };
-        pathLink.Inlines.Add(new Microsoft.UI.Xaml.Documents.Run { Text = "Presets from: " });
+        pathLink.Inlines.Add(new Microsoft.UI.Xaml.Documents.Run { Text = "预设来源：" });
         var linkRun = new Microsoft.UI.Xaml.Documents.Hyperlink();
         linkRun.Inlines.Add(new Microsoft.UI.Xaml.Documents.Run { Text = PresetsDir });
         linkRun.Click += (s, e) =>
@@ -136,7 +136,7 @@ public static class PresetPopupHelper
 
         var dlg = new ContentDialog
         {
-            Title = "Select ReShade Presets",
+            Title = "选择 ReShade 预设",
             Content = scrollViewer,
             PrimaryButtonText = "Deploy",
             IsPrimaryButtonEnabled = false,
